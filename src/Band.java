@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class Band {
 
@@ -12,6 +12,7 @@ public class Band {
     public ArrayList<Musician> musicians = new ArrayList<>();
     public ArrayList<Album> albums = new ArrayList<>();
     public ArrayList<Band> bands = new ArrayList<>();
+
 
 
     public Band (String bandName, String infoText, int yearOfFormation, String yearOfDisband){

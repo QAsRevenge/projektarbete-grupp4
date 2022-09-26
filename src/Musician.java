@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Musician {
-
+Scanner in = new Scanner(System.in);
     // Fields specific to musicians
     public String firstName;
     public String lastName;
@@ -12,10 +13,11 @@ public class Musician {
     public ArrayList<Band> bands = new ArrayList<>();
 
     // Constructor
-    public Musician(String firstName, String lastName, int dateOfBirth, String instrument){
+    public Musician(String firstName, String lastName, String infoText, int dateOfBirth, String instrument){
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
+        this.infoText = infoText;
         this.instrument = instrument;
     }
     public void joinBand(Band bandToJoin){
