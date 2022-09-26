@@ -5,6 +5,8 @@ public class Musician {
     // Fields specific to musicians
     public String firstName;
     public String lastName;
+
+    public String infoText;
     public int dateOfBirth;
     public String instrument;
     public ArrayList<Band> bands = new ArrayList<>();
