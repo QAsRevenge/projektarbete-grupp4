@@ -4,15 +4,20 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Band abba = new Band("ABBA\n","Great swedish group!\n", 1972, "..."  );
+        Band abba = new Band("ABBA\n","Great swedish group!\n", 1972, "...\n"  );
         Musician bennyAndersson = new Musician("Benny", "Andersson",
-                "Göran Bror Benny Andersson, är en svensk låtskrivare och musiker född i Stockholm",1946
-                , "Piano/Keyboard");
+                "Göran Bror Benny Andersson, är en svensk låtskrivare och musiker född i Stockholm", "1946"
+                , " ", "Piano/Keyboard");
 
         bennyAndersson.joinBand(abba);
         abba.addMusician(bennyAndersson);
         System.out.println(abba);
-        System.out.println(bennyAndersson);
+
+
+        Musician michaelJackson = new Musician("Michael", "Jackson", "\n" +
+                "Michael Jackson was an American singer, songwriter, dancer, and a philianthropist. Also known as King of Pop", "1958", "June 25, 2009", "microphone");
+        System.out.println(michaelJackson);
+
 
     }
 }
