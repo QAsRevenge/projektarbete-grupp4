@@ -14,8 +14,9 @@ public class Main {
         System.out.println(abba);
 
 
-        Musician michaelJackson = new Musician("Michael", "Jackson", "\n" +
-                "Michael Jackson was an American singer, songwriter, dancer, and a philianthropist. Also known as King of Pop", "1958", "June 25, 2009", "microphone");
+        Musician michaelJackson = new Musician("Michael", "Jackson",
+                "Michael Jackson was an American singer, songwriter, dancer, and a philianthropist.\n             " +
+                        "       He was also known as the King of Pop.", "1958", "June 25, 2009", "microphone");
         System.out.println(michaelJackson);
 
 
