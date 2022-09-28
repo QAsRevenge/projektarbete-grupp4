@@ -1,5 +1,3 @@
-import com.google.gson.annotations.JsonAdapter;
-
 import java.util.ArrayList;
 
 public class Musician extends Item{
@@ -7,32 +5,44 @@ public class Musician extends Item{
     // Fields specific to musicians
     public String firstName;
     public String lastName;
-    public String dateOfBirth; // YYYY-MM-DD
+    public String infoText;
+    public String dateOfBirth;
+    public String dateOfDeath;
     public String instrument;
 
     @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Band> bands = new ArrayList<>();
+public ArrayList<Musician> musicians = new ArrayList<>();
+
+
 
     // Constructor
-    public Musician(String firstName, String lastName, String dateOfBirth, String instrument, Band bands){
+    public Musician(String firstName, String lastName, String infoText, String dateOfBirth, String dateOfDeath, String instrument){
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
+        this.dateOfDeath = dateOfDeath;
+        this.infoText = infoText;
         this.instrument = instrument;
         ItemStore.add(this);
     }
+    public String toString(){
+        StringBuilder about = new StringBuilder("Name: " + firstName + lastName + "\nDate of birth: " + dateOfBirth + "\nDate of death: " + dateOfDeath +"\nAbout the musician: " + infoText + "\nInstrument the musician is playing: " + instrument);
+        return about + ""; //+firstName + " " + lastName + ": " + dateOfBirth + ": " +dateOfDeath + ": " + infoText + ": " + instrument;
+    }
+
     public void joinBand(Band bandToJoin){
         if (!bands.contains(bandToJoin)){
             bands.add(bandToJoin);
         }
         if (!bandToJoin.musicians.contains(this)){
-            bandToJoin.addMusician(this);
+            bandToJoin.addMusicianToBand(this);
         }
     }
     public void leaveBand(Band bandToLeave){
         bands.remove(bandToLeave);
         if (bandToLeave.musicians.contains(this)){
-            bandToLeave.removeMusician(this);
+            bandToLeave.removeMusicianFromBand(this);
         }
     }
 
