@@ -1,24 +1,39 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import com.google.gson.annotations.JsonAdapter;
 
-public class Band {
+import java.util.ArrayList;
+
+public class Band extends Item {
 
     //Field variables for Band. musician and album can inherit from this class (a band HAS a musician(s), HAS an album(s))
-    public String bandName;
-    public String infoText;
-    public int yearOfFormation;
-    public String yearOfDisband;
-    //Unsure about declaring ArrayLists for all classes, I think we need to store all musicians and albums in separate lists that we can then call?
+    private String bandName;
+    private String infoText;
+    private String yearOfFormation;
+    private String yearOfDisband;
+
+
+    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Musician> musicians = new ArrayList<>();
+
+    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Album> albums = new ArrayList<>();
+    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Band> bands = new ArrayList<>();
 
-
-    public Band (String bandName, String infoText, int yearOfFormation, String yearOfDisband){
+    public Band (String bandName, String infoText, String yearOfFormation, String yearOfDisband){
         this.bandName = bandName;
         this.infoText = infoText;
         this.yearOfFormation = yearOfFormation;
         this.yearOfDisband = yearOfDisband;
+        ItemStore.add(this);
+    }
+
+    public void addBand(Band bandToAdd){
+        if (!bandToAdd.bands.contains(this)){
+            bandToAdd.addBand(this);
+        }
+        if (!bands.contains(bandToAdd)){
+            bands.add(bandToAdd);
+        }
     }
 
     public void addMusician(Musician musicianToAdd){
