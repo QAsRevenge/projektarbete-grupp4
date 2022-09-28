@@ -22,7 +22,7 @@ public class Band {
         this.yearOfDisband = yearOfDisband;
     }
 
-    public void addMusician(Musician musicianToAdd){
+    public void addMusicianToBand(Musician musicianToAdd){
         if (!musicianToAdd.bands.contains(this)){
             musicianToAdd.joinBand(this);
         }
@@ -30,7 +30,7 @@ public class Band {
             musicians.add(musicianToAdd);
         }
     }
-    public void removeMusician(Musician musicianToRemove){
+    public void removeMusicianFromBand(Musician musicianToRemove){
         if (musicianToRemove.bands.contains(this)){
             musicianToRemove.leaveBand(this);
         }
