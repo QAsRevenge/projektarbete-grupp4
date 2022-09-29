@@ -4,12 +4,13 @@ public class Musician {
     // Fields specific to musicians
     public String firstName;
     public String lastName;
-
     public String infoText;
     public String dateOfBirth;
     public String dateOfDeath;
     public String instrument;
     public ArrayList<Band> bands = new ArrayList<>();
+public ArrayList<Musician> musicians = new ArrayList<>();
+
 
 
     // Constructor
@@ -31,13 +32,13 @@ public class Musician {
             bands.add(bandToJoin);
         }
         if (!bandToJoin.musicians.contains(this)){
-            bandToJoin.addMusician(this);
+            bandToJoin.addMusicianToBand(this);
         }
     }
     public void leaveBand(Band bandToLeave){
         bands.remove(bandToLeave);
         if (bandToLeave.musicians.contains(this)){
-            bandToLeave.removeMusician(this);
+            bandToLeave.removeMusicianFromBand(this);
         }
     }
 

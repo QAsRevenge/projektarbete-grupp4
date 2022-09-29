@@ -1,25 +1,32 @@
-
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        menu("Pick a number between 1-3.\nChoice 1: Add a Band\nChoice 2: Add a Musician\nChoice 3: Add a Album");
+    }
+    public static void menu(String menydisplay){
+        Scanner in = new Scanner(System.in);
+        String menu;
+        System.out.println(menydisplay);
+        menu = in.nextLine();
+        int menuNumber = 0;
+        try {
+            menuNumber = Integer.parseInt(menu);
+        } catch (Exception ignore){
+            System.out.println("That was not a number");
+        }
+        int parsedmenuNumber = menuNumber;
+        switch (parsedmenuNumber) {
+            case 1 -> System.out.println("You picked to add a Band");
 
+            //Band;
+            case 2 -> System.out.println("You picked to add a Musician");
 
-        Band abba = new Band("ABBA\n","Great swedish group!\n", 1972, "...\n"  );
-        Musician bennyAndersson = new Musician("Benny", "Andersson",
-                "Göran Bror Benny Andersson, är en svensk låtskrivare och musiker född i Stockholm", "1946"
-                , " ", "Piano/Keyboard");
+            //Musician;
+            case 3 -> System.out.println("You picked to add a Album");
 
-        bennyAndersson.joinBand(abba);
-        abba.addMusician(bennyAndersson);
-        System.out.println(abba);
-
-
-        Musician michaelJackson = new Musician("Michael", "Jackson",
-                "Michael Jackson was an American singer, songwriter, dancer, and a philianthropist.\n             " +
-                        "       He was also known as the King of Pop.", "August 29, 1958", "June 25, 2009", "microphone");
-        System.out.println(michaelJackson);
-
-
-
+            //Album;
+            default -> menu("Not a valid input");
+        }
     }
 }
