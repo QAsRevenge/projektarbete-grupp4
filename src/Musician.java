@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Musician {
+    Scanner in = new Scanner(System.in);
     // Fields specific to musicians
     public String firstName;
     public String lastName;
@@ -14,6 +16,7 @@ public ArrayList<Musician> musicians = new ArrayList<>();
 
 
     // Constructor
+
     public Musician(String firstName, String lastName, String infoText, String dateOfBirth, String dateOfDeath, String instrument){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,7 +24,10 @@ public ArrayList<Musician> musicians = new ArrayList<>();
         this.dateOfDeath = dateOfDeath;
         this.infoText = infoText;
         this.instrument = instrument;
+        Musician userCreateMusician = new Musician(firstName, lastName, infoText, dateOfBirth, dateOfDeath, instrument);
     }
+
+
     public String toString(){
         StringBuilder about = new StringBuilder("Name: " + firstName + lastName + "\nDate of birth: " + dateOfBirth + "\nDate of death: " + dateOfDeath +"\nAbout the musician: " + infoText + "\nInstrument the musician is playing: " + instrument);
         return about + ""; //+firstName + " " + lastName + ": " + dateOfBirth + ": " +dateOfDeath + ": " + infoText + ": " + instrument;

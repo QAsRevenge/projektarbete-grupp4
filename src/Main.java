@@ -20,10 +20,39 @@ public class Main {
             case 1 -> System.out.println("You picked to add a Band");
 
             //Band;
-            case 2 -> System.out.println("You picked to add a Musician");
+            case 2 -> {
+                System.out.println("You picked to add a Musician. Great!");
+                System.out.println("Now pick the musicians first name:");
+                String firstName = in.nextLine();
+                System.out.println("Pick the musician last name:");
+                String lastName = in.nextLine();
+                System.out.println("Wich year is/was the musician born?:");
+                String dateOfBirth = in.nextLine();
+                System.out.println("Wich year did the musician die? (Optional):");
+                String dateOfDeath = in.nextLine();
+                System.out.println("Info about the musician:");
+                String infoText = in.nextLine();
+                System.out.println("Wich instrument does the musician use? answer:");
+                String instrument = in.nextLine();
+                Musician userCreateMusician = new Musician(firstName, lastName, dateOfBirth, dateOfDeath, infoText, instrument);
+                System.out.println(userCreateMusician);
+              /*  switch (parsedmenuNumber){
+                System.out.println("Pick between one of the following\n1. Add another musician");
 
-            //Musician;
+                    case "add" -> System.out.println("add new musician");
+                    break;
+                    case "remove" -> System.out.println("remove existing an existing musician");
+                    break;
+                    case "all" -> System.out.println("show all existing musicians");
+                    default -> System.out.println("Pick one of the following numbers!");
+
+                } */
+                            //Musician;
+            }
             case 3 -> System.out.println("You picked to add a Album");
+
+
+
 
             //Album;
             default -> menu("Not a valid input");
