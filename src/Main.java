@@ -6,21 +6,23 @@ public class Main {
     public static void main(String[] args) {
         menu("Pick a number between 1-3.\nChoice 1: Add a Band\nChoice 2: Add a Musician\nChoice 3: Add a Album");
     }
-    public static void menu(String menydisplay){
+    public static void menu(String menuDisplay){
         Scanner in = new Scanner(System.in);
         String menu;
-        System.out.println(menydisplay);
+        System.out.println(menuDisplay);
         menu = in.nextLine();
-        int menuNumber = 0;
+        int menuChoice = 0;
         try {
-            menuNumber = Integer.parseInt(menu);
+            menuChoice = Integer.parseInt(menu);
         } catch (Exception ignore){
             System.out.println("That was not a number");
         }
-        int parsedmenuNumber = menuNumber;
-        switch (parsedmenuNumber) {
-            case 1 -> System.out.println("You picked to add a Band");
+        int parsedMenuNumber = menuChoice;
+        switch (parsedMenuNumber) {
+            case 1 -> {
+                System.out.println("You picked to add a Band");
 
+            }
             //Band;
             case 2 -> {
                 System.out.println("You picked to add a Musician. Great!");
@@ -44,12 +46,12 @@ public class Main {
                 userCreateMusician.addMusician(userCreateMusician);
 
                 //nested case: show musician list
-             userCreateMusician.showMusicianList();
+                userCreateMusician.showMusicianList();
                 System.out.println();
                 //nested case: search MusicianByName
                 userCreateMusician.searchMusicianByName(userCreateMusician.firstName, userCreateMusician.lastName);
                 //nested case: remove musician by name
-             userCreateMusician.removeMusicianByName(userCreateMusician.getFirstName());
+                userCreateMusician.removeMusicianByName(userCreateMusician.getFirstName());
                 System.out.println();
                 userCreateMusician.showMusicianList();
 
@@ -57,18 +59,16 @@ public class Main {
 //______________________________________________________________________________________________
 
 
-              /*  switch (parsedmenuNumber){
+              /*  switch (parsedMenuNumber){
                 System.out.println("Pick between one of the following\n1. Add another musician");
-
                     case "add" -> System.out.println("add new musician");
                     break;
                     case "remove" -> System.out.println("remove existing an existing musician");
                     break;
                     case "all" -> System.out.println("show all existing musicians");
                     default -> System.out.println("Pick one of the following numbers!");
-
                 } */
-                            //Musician;
+                //Musician;
             }
             case 3 -> System.out.println("You picked to add a Album");
 
