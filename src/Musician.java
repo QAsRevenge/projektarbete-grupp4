@@ -34,34 +34,6 @@ public class Musician {
     public String getFirstName() {
         return firstName;
     }
-
-    public void addMusician(Musician musician){
-        musicianList.add(musician);
-    }
-    public void removeMusicianByName(String firstName){
-        for (Musician musician: musicianList) {
-            if (musician.getFirstName() + musician.getLastName() == firstName + " " + lastName){
-                musicianList.remove(musician);
-            }
-        }
-        showMusicianList();
-    }
-
-
-    public void searchMusicianByName(String firstName, String lastName){
-        for (Musician musician: musicianList){
-            if ((musician.getFirstName().equals(firstName + " " + lastName))) {
-                System.out.println("Information about: " + musician.getFirstName() );
-                System.out.println(musician.getFirstName() + " " + musician.getLastName() + " " + infoText);
-
-            }
-        }
-    }
-    public void showMusicianList(){
-        for (Musician musician: musicianList){
-    System.out.println(musician.getFirstName() + " " + musician.getLastName() + " " + musician.getDateOfBirth() );
-}
-    }
     //setters and getters
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -94,6 +66,35 @@ public class Musician {
     public void setInstrument(String instrument) {
         this.instrument = instrument;
     }
+
+    public void addMusician(Musician musician){
+        musicianList.add(musician);
+    }
+    public void removeMusicianByName(String firstName){
+        for (Musician musician: musicianList) {
+            if (musician.getFirstName() + musician.getLastName() == firstName + " " + lastName){
+                musicianList.remove(musician);
+            }
+        }
+        showMusicianList();
+    }
+
+
+    public void searchMusicianByName(String firstName, String lastName){
+        for (Musician musician: musicianList){
+            if ((musician.getFirstName().equals(firstName + " " + lastName))) {
+                System.out.println("Information about: " + musician.getFirstName() );
+                System.out.println(musician.getFirstName() + " " + musician.getLastName() + " " + infoText);
+
+            }
+        }
+    }
+    public void showMusicianList(){
+        for (Musician musician: musicianList){
+    System.out.println(musician.getFirstName() + " " + musician.getLastName() + " " + musician.getDateOfBirth() );
+}
+    }
+
 
     public String toString(){
         StringBuilder about = new StringBuilder("Name: " + firstName + lastName + "\nDate of birth: " + dateOfBirth + "\nDate of death: " + dateOfDeath +"\nAbout the musician: " + infoText + "\nInstrument the musician is playing: " + instrument);
