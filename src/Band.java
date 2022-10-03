@@ -3,50 +3,86 @@ import com.google.gson.annotations.JsonAdapter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Band extends Item {
+public class Band {
 
-    //Field variables for Band. musician and album can inherit from this class (a band HAS a musician(s), HAS an album(s))
     private String bandName;
     private String infoText;
     private String yearOfFormation;
     private String yearOfDisband;
 
-
-    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Musician> musicians = new ArrayList<>();
 
-    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Album> albums = new ArrayList<>();
-    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Band> bands = new ArrayList<>();
 
-    public Band (String bandName, String infoText, String yearOfFormation, String yearOfDisband){
+    //Field variables for Band. musician and album can inherit from this class (a band HAS a musician(s), HAS an album(s))
+
+    public String getBandName() {
+        return bandName;
+    }
+
+    public void setBandName(String bandName) {
+        this.bandName = bandName;
+    }
+
+    public String getInfoText() {
+        return infoText;
+    }
+
+    public void setInfoText(String infoText) {
+        this.infoText = infoText;
+    }
+
+    public String getYearOfFormation() {
+        return yearOfFormation;
+    }
+
+    public void setYearOfFormation(String yearOfFormation) {
+        this.yearOfFormation = yearOfFormation;
+    }
+
+    public String getYearOfDisband() {
+        return yearOfDisband;
+    }
+
+    public void setYearOfDisband(String yearOfDisband) {
+        this.yearOfDisband = yearOfDisband;
+    }
+
+    public Band(String bandName, String infoText, String yearOfFormation, String yearOfDisband) {
         this.bandName = bandName;
         this.infoText = infoText;
         this.yearOfFormation = yearOfFormation;
         this.yearOfDisband = yearOfDisband;
-        ItemStore.add(this);
     }
 
-    public void addBand(Band bandToAdd){
-        if (!bandToAdd.bands.contains(this)){
+    public void addBand(Band bandToAdd) {
+        if (!bandToAdd.bands.contains(this)) {
             bandToAdd.addBand(this);
         }
-        if (!bands.contains(bandToAdd)){
+        if (!bands.contains(bandToAdd)) {
             bands.add(bandToAdd);
         }
     }
 
-    public void addMusicianToBand(Musician musicianToAdd){
-        if (!musicianToAdd.bands.contains(this)){
+    public void removeBand(Band bandToRemove) {
+        if (bandToRemove.bands.contains(this)) {
+            bandToRemove.removeBand(this);
+        }
+        bands.remove(bandToRemove);
+    }
+
+    public void addMusicianToBand(Musician musicianToAdd) {
+        if (!musicianToAdd.bands.contains(this)) {
             musicianToAdd.joinBand(this);
         }
-        if (!musicians.contains(musicianToAdd)){
+        if (!musicians.contains(musicianToAdd)) {
             musicians.add(musicianToAdd);
         }
     }
-    public void removeMusicianFromBand(Musician musicianToRemove){
-        if (musicianToRemove.bands.contains(this)){
+
+    public void removeMusicianFromBand(Musician musicianToRemove) {
+        if (musicianToRemove.bands.contains(this)) {
             musicianToRemove.leaveBand(this);
         }
         musicians.remove(musicianToRemove);
@@ -58,13 +94,13 @@ public class Band extends Item {
         if (!albumToAdd.bands.contains
 */
     @Override
-    public String toString(){
-        StringBuilder info = new StringBuilder("Band: " + bandName + "Info: " + infoText + "Years active: " + yearOfFormation + "-" + yearOfDisband );
-        for (Band band : bands){
+    public String toString() {
+        StringBuilder info = new StringBuilder("Band: " + bandName + "Info: " + infoText + "Years active: " + yearOfFormation + "-" + yearOfDisband);
+        for (Band band : bands) {
             info.append(band.toString());
             info.append(", ");
         }
-        return  info.toString();
+        return info.toString();
     }
-    }
+}
 
