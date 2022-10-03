@@ -33,4 +33,13 @@ public class Album {
     public void addAlbum(Album album){
     albumList.add(album);
     }
+    public void removeAlbum(Album album){
+        albumList.remove(album);
+    }
+
+
+
 }
+
+
+
