@@ -88,11 +88,9 @@ public class Musician {
     public void setInfoText(String infoText) {
         this.infoText = infoText;
     }
-
     public String getInstrument() {
         return instrument;
     }
-
     public void setInstrument(String instrument) {
         this.instrument = instrument;
     }

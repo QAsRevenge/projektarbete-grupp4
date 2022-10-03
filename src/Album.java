@@ -2,6 +2,9 @@ import java.util.ArrayList;
 
 public class Album {
     public ArrayList<Album> albums = new ArrayList<>();
+    public ArrayList<Band> bands = new ArrayList<>();
+    public ArrayList<Album> albumList = new ArrayList<>();
+
     // Add field and method for solo albums?
     // Album can have a single musician or a whole band
     public String albumName;
@@ -25,5 +28,9 @@ public class Album {
         }
     }
     */
-    
+
+    //add album in the List
+    public void addAlbum(Album album){
+    albumList.add(album);
+    }
 }
