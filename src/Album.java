@@ -10,15 +10,17 @@ public class Album {
     public String albumName;
     public String infoText;
     public String yearOfRelease;
+    public String soloAlbum;
 
     public String toString(){
-        StringBuilder about = new StringBuilder("Album: " + albumName + infoText + yearOfRelease);
+        StringBuilder about = new StringBuilder("Album: " + albumName + infoText + yearOfRelease + soloAlbum);
         return  about + "";
     }
-    public Album(String albumName, String infoText, String yearOfRelease) {
+    public Album(String albumName, String infoText, String yearOfRelease, String soloAlbum) {
         this.albumName = albumName;
         this.infoText = infoText;
         this.yearOfRelease = yearOfRelease;
+        this.soloAlbum = soloAlbum;
     }
 
    /* public void addMusicianToAlbum(String MusicianToAdd){
@@ -35,6 +37,10 @@ public class Album {
     }
     public void removeAlbum(Album album){
         albumList.remove(album);
+    }
+    
+    public void addSoloAlbum(SoloAlbum album){
+        albumList.add(soloAlbum);
     }
 
     public void addAlbumToBand(Band albumToAdd){
