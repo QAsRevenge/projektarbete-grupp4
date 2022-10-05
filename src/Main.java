@@ -1,30 +1,26 @@
-
+import java.util.ArrayList;
 import java.util.Scanner;
+
 public class Main {
 
+    static ArrayList<Musician> musicians = new ArrayList<>();
 
     public static void main(String[] args) {
         menu("Pick a number between 1-3.\nChoice 1: Add a Band\nChoice 2: Add a Musician\nChoice 3: Add a Album");
     }
-    public static void menu(String menuDisplay){
+
+    public static void menu(String menuDisplay) {
         Scanner in = new Scanner(System.in);
         String menu;
         System.out.println(menuDisplay);
-        menu = in.nextLine();
-        int menuChoice = 0;
-        try {
-            menuChoice = Integer.parseInt(menu);
-        } catch (Exception ignore){
-            System.out.println("That was not a number");
-        }
-        int parsedMenuNumber = menuChoice;
-        switch (parsedMenuNumber) {
-            case 1 -> {
+
+        switch (in.nextLine()) {
+            case "1" -> {
                 System.out.println("You picked to add a Band");
 
             }
             //Band;
-            case 2 -> {
+            case "2" -> {
                 System.out.println("You picked to add a Musician. Great!");
                 System.out.println("Now pick the musicians first name:");
                 String firstName = in.nextLine();
@@ -39,21 +35,38 @@ public class Main {
                 System.out.println("Wich instrument does the musician use? answer:");
                 String instrument = in.nextLine();
                 Musician userCreateMusician = new Musician(firstName, lastName, dateOfBirth, dateOfDeath, infoText, instrument);
+                musicians.add(userCreateMusician);
                 System.out.println(userCreateMusician + "\n");
+                System.out.println("Choose between the following alternatives:\n 1. Add another musician.\n 2. Show existing musicians.");
+                switch (in.nextLine()) {
+                    case "1" -> {
+
+                    }
+                    case "2" -> {
+
+                    }
+                    case "3" -> {
+
+                    }
+                }
+
+
+                System.out.println(musicians);
+
 //_____________________________________________________________________________________________
                 //nested case: add another musician
                 // System.out.println("Add another musician\n");
-                userCreateMusician.addMusician(userCreateMusician);
+                //userCreateMusician.addMusician(userCreateMusician);
 
                 //nested case: show musician list
-                userCreateMusician.showMusicianList();
+                //   userCreateMusician.showMusicianList();
                 System.out.println();
                 //nested case: search MusicianByName
-                userCreateMusician.searchMusicianByName(userCreateMusician.firstName, userCreateMusician.lastName);
+                //   userCreateMusician.searchMusicianByName(userCreateMusician.firstName, userCreateMusician.lastName);
                 //nested case: remove musician by name
-                userCreateMusician.removeMusicianByName(userCreateMusician.getFirstName());
+                // userCreateMusician.removeMusicianByName(userCreateMusician.getFirstName());
                 System.out.println();
-                userCreateMusician.showMusicianList();
+                //    userCreateMusician.showMusicianList();
 
                 //Ta inte bort
 //______________________________________________________________________________________________
@@ -70,9 +83,7 @@ public class Main {
                 } */
                 //Musician;
             }
-            case 3 -> System.out.println("You picked to add a Album");
-
-
+            case "3" -> System.out.println("You picked to add a Album");
 
 
             //Album;
