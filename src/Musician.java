@@ -22,9 +22,7 @@ public class Musician {
         this.dateOfDeath = dateOfDeath;
         this.infoText = infoText;
         this.instrument = instrument;
-    }
 
-    public Musician(String firstName, String lastName, String infoText, String dateOfBirth, Band band) {
     }
 
     public String getLastName() {
@@ -101,8 +99,7 @@ public class Musician {
 
 
     public String toString(){
-        StringBuilder about = new StringBuilder("Name: " + firstName +" " + lastName + "\nDate of birth: " + dateOfBirth + "\nDate of death: " + dateOfDeath +"\nAbout the musician: " + infoText + "\nInstrument the musician is playing: " + instrument);
-        return about + "";
+        return "\nName: " + firstName + " " + lastName + "\nDate of birth: " + dateOfBirth + "\nDate of death: " + dateOfDeath + "\nAbout the musician: " + infoText + "\nInstrument the musician is playing: " + instrument + "\n";
     }
 
     public void joinBand(Band bandToJoin){
