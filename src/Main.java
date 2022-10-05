@@ -32,12 +32,13 @@ public class Main {
                 String infoText = in.nextLine();
                 System.out.println("Which instrument does the musician use? answer:");
                 String instrument = in.nextLine();
-                Musician userCreateMusician = new Musician(firstName, lastName, dateOfBirth, dateOfDeath, infoText, instrument);
+                Musician userCreateMusician = new Musician(firstName, lastName, infoText, dateOfBirth,dateOfDeath , instrument);
                 musicians.add(userCreateMusician);
                 System.out.println(userCreateMusician + "\n");
 
             }
-            case "3" -> System.out.println(musicians);
+            case "3" -> System.out.println("List of current musicians:" + musicians);
+            case "4" -> System.out.println();
             case "6" -> System.out.println("You picked to add a Album");
 
             case "quit" -> System.exit(1);
