@@ -4,6 +4,7 @@ public class Musician {
 
     // Fields specific to musicians
     public String firstName;
+
     public String lastName;
     public String infoText;
     public String dateOfBirth;
@@ -21,6 +22,9 @@ public class Musician {
         this.dateOfDeath = dateOfDeath;
         this.infoText = infoText;
         this.instrument = instrument;
+    }
+
+    public Musician(String firstName, String lastName, String infoText, String dateOfBirth, Band band) {
     }
 
     public String getLastName() {
