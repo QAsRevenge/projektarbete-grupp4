@@ -30,13 +30,13 @@ public class Main {
                 String firstName = in.nextLine();
                 System.out.println("Pick the musician last name:");
                 String lastName = in.nextLine();
-                System.out.println("Wich year is/was the musician born?:");
+                System.out.println("Which year is/was the musician born?:");
                 String dateOfBirth = in.nextLine();
-                System.out.println("Wich year did the musician die? (Optional):");
+                System.out.println("Which year did the musician die? (Optional):");
                 String dateOfDeath = in.nextLine();
                 System.out.println("Info about the musician:");
                 String infoText = in.nextLine();
-                System.out.println("Wich instrument does the musician use? answer:");
+                System.out.println("Which instrument does the musician use? answer:");
                 String instrument = in.nextLine();
                 Musician userCreateMusician = new Musician(firstName, lastName, dateOfBirth, dateOfDeath, infoText, instrument);
                 System.out.println(userCreateMusician + "\n");

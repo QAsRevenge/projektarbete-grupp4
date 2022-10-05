@@ -1,4 +1,4 @@
-import com.google.gson.annotations.JsonAdapter;
+
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -62,6 +62,15 @@ public class Band {
         }
         if (!bands.contains(bandToAdd)) {
             bands.add(bandToAdd);
+        }
+    }
+
+    public void addBandToAlbum(Album albumToAdd) {
+        if (!albumToAdd.bands.contains(this)) {
+            albumToAdd.addAlbumToBand(this);
+        }
+        if (!albums.contains(albumToAdd)) {
+            albums.add(albumToAdd);
         }
     }
 

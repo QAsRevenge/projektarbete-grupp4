@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Album {
-    public ArrayList<Album> albums = new ArrayList<>();
+    public ArrayList<Band> albums = new ArrayList<>();
     public ArrayList<Band> bands = new ArrayList<>();
     public ArrayList<Album> albumList = new ArrayList<>();
 
@@ -37,8 +37,20 @@ public class Album {
         albumList.remove(album);
     }
 
+    public void addAlbumToBand(Band albumToAdd){
+        if(!albumToAdd.bands.contains(this)){
+            albumToAdd.addBandToAlbum(this);
+        }
+        if (!albums.contains(albumToAdd)) {
+            albums.add(albumToAdd);
+    }
 
-
+}   public void removeAlbumFromBand(Album albumToRemove){
+    if(albumToRemove.bands.contains(this)){
+        albumToRemove.removeAlbumFromBand(this);
+    }
+        albums.remove(albumToRemove);
+    }
 }
 
 
