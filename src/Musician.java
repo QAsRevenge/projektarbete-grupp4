@@ -101,7 +101,7 @@ public class Musician {
 
 
     public String toString(){
-        StringBuilder about = new StringBuilder("Name: " + firstName + lastName + "\nDate of birth: " + dateOfBirth + "\nDate of death: " + dateOfDeath +"\nAbout the musician: " + infoText + "\nInstrument the musician is playing: " + instrument);
+        StringBuilder about = new StringBuilder("Name: " + firstName +" " + lastName + "\nDate of birth: " + dateOfBirth + "\nDate of death: " + dateOfDeath +"\nAbout the musician: " + infoText + "\nInstrument the musician is playing: " + instrument);
         return about + "";
     }
 
