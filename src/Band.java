@@ -1,9 +1,9 @@
 
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
+import java.util.*;
 public class Band {
+    private record MemberDetails(String yearJoined,List<String>instruments){};
+    private HashMap<Musician,MemberDetails>memberDetails = new HashMap<>();
 
     private String bandName;
     private String infoText;
@@ -81,12 +81,13 @@ public class Band {
         bands.remove(bandToRemove);
     }
 
-    public void addMusicianToBand(Musician musicianToAdd) {
+    public void addMusicianToBand(Musician musicianToAdd,String yearJoined,List<String>instruments) {
         if (!musicianToAdd.bands.contains(this)) {
             musicianToAdd.joinBand(this);
         }
         if (!musicians.contains(musicianToAdd)) {
             musicians.add(musicianToAdd);
+            memberDetails.put(musicianToAdd,new MemberDetails(yearJoined,instruments));
         }
     }
 
