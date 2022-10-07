@@ -61,11 +61,17 @@ public class Main {
 
             }
             case "3" -> print("List of current musicians:" + musicians + "\n");
-            case "4" -> { print("Remove musician, choose between the musicians numbers" + musicians.remove(in.nextLine()));
-                for (Musician musician : musicians){
-                    if (musician.firstName + musician.lastName == musician.firstName + " " + musician.lastName){
-                musicians.remove(in.nextLine());}
-            }
+            case "4" -> {
+                System.out.println("Remove one of the current existing musicians.");
+                print("Enter the musicians first name.");
+                String firstName = in.nextLine();
+                print("Enter the musicians last name.");
+                String lastName = in.nextLine();
+                for (int i = musicians.size()-1; i >= 0; i--){
+                    if (musicians.get(i).firstName.equals(firstName) && musicians.get(i).lastName.equals(lastName)){
+                        musicians.remove(i);
+                    }
+                }
             }
             //Album
             case "5" -> print("You picked to add a Album");

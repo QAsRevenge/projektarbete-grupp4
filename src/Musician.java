@@ -107,7 +107,8 @@ public class Musician {
             bands.add(bandToJoin);
         }
         if (!bandToJoin.musicians.contains(this)){
-            bandToJoin.addMusicianToBand(this);
+            ArrayList<String>emptyList = new ArrayList<>();
+            bandToJoin.addMusicianToBand(this, "1943", emptyList );
         }
     }
     public void leaveBand(Band bandToLeave){
