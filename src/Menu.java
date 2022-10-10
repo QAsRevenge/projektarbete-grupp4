@@ -8,6 +8,7 @@ public class Menu {
         Scanner in = new Scanner(System.in);
         System.out.println(menuDisplay);
 
+
         switch (in.nextLine()) {
             //band
             case "1" -> {
@@ -32,6 +33,7 @@ public class Menu {
 
             }
             //musician
+
             case "2" -> {
                 System.out.printf("%s%n%s%n", "You picked to add a Musician. Great!", "Now pick the musicians first name:");
                 String firstName = in.nextLine();
@@ -65,6 +67,7 @@ public class Menu {
             }
             //Album
             case "5" -> print("You picked to add a Album");
+
 
             case "quit" -> System.exit(1); //Exits the program.
 
