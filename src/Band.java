@@ -3,7 +3,7 @@
 import java.util.*;
 public class Band {
     private record MemberDetails(String yearJoined,List<String>instruments){};
-    private HashMap<Musician,MemberDetails>memberDetails = new HashMap<>();
+    private final HashMap<Musician,MemberDetails>memberDetails = new HashMap<>();
 
     private String bandName;
     private String infoText;
