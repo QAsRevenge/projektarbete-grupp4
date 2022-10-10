@@ -100,7 +100,7 @@ public class Band{
         for (Album album : bandToDisplay.albums){
             print(album.getAlbumName());
         }
-        print("The bands current members: ");
+        print("The bands members: ");
         for (Musician musicians : bandToDisplay.musicians){
             print(musicians.getFirstName());
             print(" ");
