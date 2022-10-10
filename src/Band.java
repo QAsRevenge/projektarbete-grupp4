@@ -1,53 +1,14 @@
+import java.util.ArrayList;
 
-
-import java.util.*;
-public class Band {
-    private record MemberDetails(String yearJoined,List<String>instruments){};
-    private final HashMap<Musician,MemberDetails>memberDetails = new HashMap<>();
-
-    private String bandName;
-    private String infoText;
-    private String yearOfFormation;
-    private String yearOfDisband;
-
-    public ArrayList<Musician> musicians = new ArrayList<>();
-
+public class Band{
+    private final String bandName;
+    private final String infoText;
+    private final String yearOfFormation;
+    private final String yearOfDisband;
     public ArrayList<Album> albums = new ArrayList<>();
+    public ArrayList<Musician> musicians = new ArrayList<>();
+    public ArrayList<Musician> pastMusicians = new ArrayList<>();
     public ArrayList<Band> bands = new ArrayList<>();
-
-    //Field variables for Band. musician and album can inherit from this class (a band HAS a musician(s), HAS an album(s))
-
-    public String getBandName() {
-        return bandName;
-    }
-
-    public void setBandName(String bandName) {
-        this.bandName = bandName;
-    }
-
-    public String getInfoText() {
-        return infoText;
-    }
-
-    public void setInfoText(String infoText) {
-        this.infoText = infoText;
-    }
-
-    public String getYearOfFormation() {
-        return yearOfFormation;
-    }
-
-    public void setYearOfFormation(String yearOfFormation) {
-        this.yearOfFormation = yearOfFormation;
-    }
-
-    public String getYearOfDisband() {
-        return yearOfDisband;
-    }
-
-    public void setYearOfDisband(String yearOfDisband) {
-        this.yearOfDisband = yearOfDisband;
-    }
 
     public Band(String bandName, String infoText, String yearOfFormation, String yearOfDisband) {
         this.bandName = bandName;
@@ -56,61 +17,140 @@ public class Band {
         this.yearOfDisband = yearOfDisband;
     }
 
-    public void addBand(Band bandToAdd) {
-        if (!bandToAdd.bands.contains(this)) {
-            bandToAdd.addBand(this);
-        }
-        if (!bands.contains(bandToAdd)) {
-            bands.add(bandToAdd);
+    public void addAlbum(Album addAlbum){
+        if(!albums.contains(addAlbum)){
+            albums.add(addAlbum);
+            System.out.println("The album " + addAlbum + " has been added.");
         }
     }
 
-    public void addBandToAlbum(Album albumToAdd) {
-        if (!albumToAdd.bands.contains(this)) {
-            albumToAdd.addAlbumToBand(this);
+    public void removeAlbum(Album removeAlbum){
+        if (albums.contains(removeAlbum)){
+            albums.remove(removeAlbum);
+            System.out.println("The album " + removeAlbum + " has been removed.");
+        }
+    }
+
+    public void addMusician(Musician addMusician){
+        if(!musicians.contains(addMusician)){
+            musicians.add(addMusician);
+            System.out.println("The musician " + addMusician + " has been added.");
+        }
+    }
+
+    public void removeMusician(Musician removeMusician){
+        if (musicians.contains(removeMusician)){
+            musicians.remove(removeMusician);
+            pastMusicians.add(removeMusician);
+            System.out.println("The musician " + removeMusician + " has been removed from the band and added to it's past members");
+        }
+    }
+
+
+    public void addBandToAlbum(Band band, Album albumToAdd) {
+        if (!band.getAlbums().contains(albumToAdd)) {
+            band.addAlbum(albumToAdd);
+            System.out.println("The album " + albumToAdd + " has been added to the band " + band);
         }
         if (!albums.contains(albumToAdd)) {
             albums.add(albumToAdd);
         }
     }
-
-    public void removeBand(Band bandToRemove) {
-        if (bandToRemove.bands.contains(this)) {
-            bandToRemove.removeBand(this);
+    public void removeBandFromAlbum(Band band, Album albumToRemove){
+        if (band.getAlbums().contains(albumToRemove)){
+            band.removeAlbum(albumToRemove);
         }
-        bands.remove(bandToRemove);
     }
-
-    public void addMusicianToBand(Musician musicianToAdd,String yearJoined,List<String>instruments) {
-        if (!musicianToAdd.bands.contains(this)) {
-            musicianToAdd.joinBand(this);
+    public void addMusicianToBand(Band band, Musician musicianToAdd) {
+        if (!band.getMusicians().contains(musicianToAdd)) {
+            band.addMusician(musicianToAdd);
+            System.out.println("The musician " + musicianToAdd + " has been added to the band " + band);
         }
         if (!musicians.contains(musicianToAdd)) {
             musicians.add(musicianToAdd);
-            memberDetails.put(musicianToAdd,new MemberDetails(yearJoined,instruments));
         }
     }
 
-    public void removeMusicianFromBand(Musician musicianToRemove) {
-        if (musicianToRemove.bands.contains(this)) {
-            musicianToRemove.leaveBand(this);
+    public void removeMusicianFromBand(Musician musicianToRemove, Band band) {
+        if (band.getMusicians().contains(musicianToRemove)) {
+            musicianToRemove.leaveBand(band);
         }
         musicians.remove(musicianToRemove);
     }
-
-    /* // Wait with this until group discussion regarding how to add soloalbums
-       // and "band albums"
-    public void addAlbum(Album albumToAdd){
-        if (!albumToAdd.bands.contains
-*/
-    @Override
-    public String toString() {
-        StringBuilder info = new StringBuilder("Band: " + bandName + "Info: " + infoText + "Years active: " + yearOfFormation + "-" + yearOfDisband);
-        for (Band band : bands) {
-            info.append(band.toString());
-            info.append(", ");
+    public void displayBand(Band bandToDisplay){
+        print("Band: " + bandToDisplay.bandName);
+        print("\n");
+        print("Band information: ");
+        print(bandToDisplay.infoText);
+        print("\n");
+        print("Band: ");
+        print(bandToDisplay.bandName);
+        print("\n");
+        print("Band information: ");
+        print(bandToDisplay.infoText);
+        print("\n");
+        print("Year of formation: ");
+        print(bandToDisplay.yearOfFormation);
+        print("\n");
+        if (bandToDisplay.yearOfDisband.equals("")){
+            print("Year of disband: ");
+            print(bandToDisplay.yearOfDisband);
         }
-        return info.toString();
+        print("The bands albums: ");
+        for (Album album : bandToDisplay.albums){
+            print(album.getAlbumName());
+        }
+        print("The bands current members: ");
+        for (Musician musicians : bandToDisplay.musicians){
+            print(musicians.getFirstName());
+            print(" ");
+            print(musicians.getLastName());
+            print(" ");
+            print(musicians.getInstrument());
+        }
+        System.out.println(bandToDisplay);
+    }
+
+    public String getBandName() {
+        return bandName;
+    }
+
+    public String getInfoText() {
+        return infoText;
+    }
+
+    public String getYearOfFormation() {
+        return yearOfFormation;
+    }
+
+    public String getYearOfDisband() {
+        return yearOfDisband;
+    }
+
+    public ArrayList<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(ArrayList<Album> albums) {
+        this.albums = albums;
+    }
+
+    public ArrayList<Musician> getMusicians() {
+        return musicians;
+    }
+
+    public void setMusicians(ArrayList<Musician> musicians) {
+        this.musicians = musicians;
+    }
+
+    public ArrayList<Musician> getPastMusicians() {
+        return pastMusicians;
+    }
+
+    public void setPastMusicians(ArrayList<Musician> pastMusicians) {
+        this.pastMusicians = pastMusicians;
+    }
+    public static void print(String toPrint){
+        System.out.println(toPrint);
     }
 }
-
