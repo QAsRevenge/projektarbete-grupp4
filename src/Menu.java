@@ -8,49 +8,35 @@ public class Menu {
         Scanner in = new Scanner(System.in);
         System.out.println(menuDisplay);
 
-
-        switch (in.nextLine()) {
-            //band
+        switch (menuDisplay) {
             case "1" -> {
-                System.out.printf("%s%n%s%n", "You picked to add a Band", "What is the band name?");
+                print("You picked to add a band\n");
+                print("What is the bands name?");
                 String bandName = in.nextLine();
-                print("Write some info about the band");
+                print("Enter information about the band.");
                 String infoText = in.nextLine();
                 print("Which year did the band form?");
                 String yearOfFormation = in.nextLine();
-                print("Which year did the band disband? If they have not disbanded yet, press enter");
-                String yearOfdDisband = in.nextLine();
-                // Probably is a better way to do it but this is what I came up with,
-                // thinking of using split to cut out what we want from the input.
-                print("Which are the current members of the band, which year did they join and what kind of instrument(s) did they play? \nUse a comma to separate members, year and instrument(s). End with a dot. \nExample: Gene Simmons, 1973, bass.");
-                String currentMembersYearjoinInstruments = in.nextLine();
-                print("");
-                print("Are there any former members of the band and if so, which year did he/her/they leave? Separate with comma.");
-                String formerMembersyearLeft = in.nextLine();
-                print("Write the album(s) the band has released. If they are more than one, separate with a comma.");
-                String bandAlbum = in.nextLine();
-                Band userCreateBand = new Band(bandName, infoText, yearOfFormation, yearOfdDisband);
-                Main.bands.add(userCreateBand);
-                print(userCreateBand + "\n");
-                // Code block not yet done
+                print("Which year did the band disband? If they have not disbanded yet, press enter.");
+                String yearOfDisband = in.nextLine();
+                Band newBand = new Band(bandName, infoText, yearOfFormation, yearOfDisband);
+                Main.bands.add(newBand);
+                print(bandName + " has been added.");
 
             }
 
             case "2" -> {
-                System.out.println("List of current bands" + Main.bands + "\n");
+                System.out.println("List of current bands:\n" + Main.bands);
             }
             case "3" -> {
-                print("Remove one of the current existing bands.\nEnter the bands first name.");
-                //print("Enter the musicians first name.");
+                print("Remove an existing band.\nEnter the bands name.");
                 String bandName = in.nextLine();
                 for (int i = Main.bands.size()-1; i >= 0; i--){
-                    if (Main.musicians.get(i).firstName.equals(bandName)){
+                    if (Main.bands.get(i).getBandName().equals(bandName))
                         Main.bands.remove(i);
+                    print(i + " has been removed");
                     }
-                }
             }
-            //musician
-
 
             case "4" -> {
                 System.out.printf("%s%n%s%n", "You picked to add a Musician. Great!", "Now pick the musicians first name:");
@@ -92,7 +78,7 @@ public class Menu {
 
             case "quit" -> System.exit(1); //Exits the program.
 
-            default -> menu("Not a valid input. Choose between the following numbers"); //<- sout If not a valid input.
+            default -> menu("Not a valid input. Choose an option"); //<- sout If not a valid input.
         }
     }
 }

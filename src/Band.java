@@ -77,23 +77,25 @@ public class Band{
         }
         musicians.remove(musicianToRemove);
     }
-    public void displayBand(Band bandToDisplay) {
-        print("Band: " + bandToDisplay.bandName +
-                "\n" + "Band information: " + bandToDisplay.infoText +
-                "\n" + "Year of formation: " + bandToDisplay.yearOfFormation + "\n");
-        print("\n");
-        if (bandToDisplay.yearOfDisband.equals("")) {
-            print("Year of disband: " + bandToDisplay.yearOfDisband);
+
+    public void searchBandByName(String bandName){
+        for (Band band: Main.bands){
+            if ((band.getBandName().equals(bandName))) {
+                System.out.println("Information about: " + band.getBandName() );
+                System.out.println(band.getInfoText());
+
+            }
         }
-        print("The bands albums: ");
-        for (Album album : bandToDisplay.albums) {
-            print(album.getAlbumName());
+    }
+    public void showBandList(){
+        for (Band band: Main.bands){
+            System.out.println(band.getBandName() + " " + band.getInfoText() + " " + band.getYearOfFormation() + " " + band.getYearOfDisband());
         }
-        print("The bands members: ");
-        for (Musician musicians : bandToDisplay.musicians) {
-            print(musicians.getFirstName() + " " + musicians.getLastName() + " " + musicians.getInstrument());
-        }
-        System.out.println(bandToDisplay);
+    }
+
+    @Override
+    public String toString() {
+        return "\nBand name: " + bandName  + "\nInfo about the band: " + infoText + "\nDate of formation: " + yearOfFormation + "\nDate of disband (optional): " + yearOfDisband;
     }
 
     public String getBandName() {
