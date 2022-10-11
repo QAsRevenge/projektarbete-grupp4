@@ -29,12 +29,30 @@ public class Menu {
                 String formerMembersyearLeft = in.nextLine();
                 print("Write the album(s) the band has released. If they are more than one, separate with a comma.");
                 String bandAlbum = in.nextLine();
+                Band userCreateBand = new Band(bandName, infoText, yearOfFormation, yearOfdDisband);
+                Main.bands.add(userCreateBand);
+                print(userCreateBand + "\n");
                 // Code block not yet done
 
             }
-            //musician
 
             case "2" -> {
+                System.out.println("List of current bands" + Main.bands + "\n");
+            }
+            case "3" -> {
+                print("Remove one of the current existing bands.\nEnter the bands first name.");
+                //print("Enter the musicians first name.");
+                String bandName = in.nextLine();
+                for (int i = Main.bands.size()-1; i >= 0; i--){
+                    if (Main.musicians.get(i).firstName.equals(bandName)){
+                        Main.bands.remove(i);
+                    }
+                }
+            }
+            //musician
+
+
+            case "4" -> {
                 System.out.printf("%s%n%s%n", "You picked to add a Musician. Great!", "Now pick the musicians first name:");
                 String firstName = in.nextLine();
                 print("Pick the musician last name:");
@@ -52,8 +70,9 @@ public class Menu {
                 print(userCreateMusician + "\n");
 
             }
-            case "3" -> print("List of current musicians:" + Main.musicians + "\n");
-            case "4" -> {
+
+            case "5" -> print("List of current musicians:" + Main.musicians + "\n");
+            case "6" -> {
                 print("Remove one of the current existing musicians.\nEnter the musicians first name.");
                 //print("Enter the musicians first name.");
                 String firstName = in.nextLine();
@@ -66,7 +85,9 @@ public class Menu {
                 }
             }
             //Album
-            case "5" -> print("You picked to add a Album");
+            case "7" -> print("You picked to add a Album");
+
+            case "8" -> print("You picked to add an existing musician to an existing band");
 
 
             case "quit" -> System.exit(1); //Exits the program.
