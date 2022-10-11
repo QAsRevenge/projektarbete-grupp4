@@ -77,36 +77,21 @@ public class Band{
         }
         musicians.remove(musicianToRemove);
     }
-    public void displayBand(Band bandToDisplay){
-        print("Band: " + bandToDisplay.bandName);
+    public void displayBand(Band bandToDisplay) {
+        print("Band: " + bandToDisplay.bandName +
+                "\n" + "Band information: " + bandToDisplay.infoText +
+                "\n" + "Year of formation: " + bandToDisplay.yearOfFormation + "\n");
         print("\n");
-        print("Band information: ");
-        print(bandToDisplay.infoText);
-        print("\n");
-        print("Band: ");
-        print(bandToDisplay.bandName);
-        print("\n");
-        print("Band information: ");
-        print(bandToDisplay.infoText);
-        print("\n");
-        print("Year of formation: ");
-        print(bandToDisplay.yearOfFormation);
-        print("\n");
-        if (bandToDisplay.yearOfDisband.equals("")){
-            print("Year of disband: ");
-            print(bandToDisplay.yearOfDisband);
+        if (bandToDisplay.yearOfDisband.equals("")) {
+            print("Year of disband: " + bandToDisplay.yearOfDisband);
         }
         print("The bands albums: ");
-        for (Album album : bandToDisplay.albums){
+        for (Album album : bandToDisplay.albums) {
             print(album.getAlbumName());
         }
         print("The bands members: ");
-        for (Musician musicians : bandToDisplay.musicians){
-            print(musicians.getFirstName());
-            print(" ");
-            print(musicians.getLastName());
-            print(" ");
-            print(musicians.getInstrument());
+        for (Musician musicians : bandToDisplay.musicians) {
+            print(musicians.getFirstName() + " " + musicians.getLastName() + " " + musicians.getInstrument());
         }
         System.out.println(bandToDisplay);
     }
