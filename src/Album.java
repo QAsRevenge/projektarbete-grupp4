@@ -9,18 +9,17 @@ public class Album {
     // Album can have a single musician or a whole band
     public String albumName;
     public String infoText;
-    public String yearOfRelease;
-    public String soloAlbum;
+    public int yearOfRelease;
+
 
     public String toString(){
-        StringBuilder about = new StringBuilder("Album: " + albumName + infoText + yearOfRelease + soloAlbum);
-        return  about + "";
+
+        return "\nAlbum: " + albumName + "\nInfo: " + infoText + "\nYear of release: " + yearOfRelease;
     }
-    public Album(String albumName, String infoText, String yearOfRelease, String soloAlbum) {
+    public Album(String albumName, String infoText, int yearOfRelease) {
         this.albumName = albumName;
         this.infoText = infoText;
         this.yearOfRelease = yearOfRelease;
-        this.soloAlbum = soloAlbum;
     }
 
    /* public void addMusicianToAlbum(String MusicianToAdd){
@@ -39,19 +38,19 @@ public class Album {
         albumList.remove(album);
     }
     
-    public void addSoloAlbum(SoloAlbum album){
-        albumList.add(soloAlbum);
-    }
+    //public void addSoloAlbum(SoloAlbum album){
+      //  albumList.add(soloAlbum);
+  //  }
 
-    public void addAlbumToBand(Band albumToAdd){
+   /* public void addAlbumToBand(Band albumToAdd){
         if(!albumToAdd.bands.contains(this)){
             albumToAdd.addBandToAlbum(this);
         }
         if (!albums.contains(albumToAdd)) {
             albums.add(albumToAdd);
-    }
+    }*/
 
-}   public void removeAlbumFromBand(Album albumToRemove){
+}/*   public void removeAlbumFromBand(Album albumToRemove){
     if(albumToRemove.bands.contains(this)){
         albumToRemove.removeAlbumFromBand(this);
     }
@@ -59,5 +58,5 @@ public class Album {
     }
 }
 
-
+*/
 

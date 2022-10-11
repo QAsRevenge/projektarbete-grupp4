@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Menu {
+    private static int i;
+
     public static void print(String toPrint){
         System.out.println(toPrint);
     }
@@ -43,15 +45,15 @@ public class Menu {
                 String firstName = in.nextLine();
                 print("Pick the musician last name:");
                 String lastName = in.nextLine();
-                print("Which year is/was the musician born?:");
+                print("Which date was the musician born?:");
                 String dateOfBirth = in.nextLine();
-                print("Which year did the musician die? (Optional):");
+                print("Which date did the musician die? (Optional):");
                 String dateOfDeath = in.nextLine();
                 print("Info about the musician:");
                 String infoText = in.nextLine();
                 print("Which instrument does the musician use? answer:");
                 String instrument = in.nextLine();
-                Musician userCreateMusician = new Musician(firstName, lastName, infoText, dateOfBirth,dateOfDeath , instrument);
+                Musician userCreateMusician = new Musician(firstName, lastName, infoText, dateOfBirth, dateOfDeath , instrument);
                 Main.musicians.add(userCreateMusician);
                 print(userCreateMusician + "\n");
 
@@ -71,11 +73,28 @@ public class Menu {
                 }
             }
             //Album
-            case "7" -> print("You picked to add a Album");
-
-            case "8" -> print("You picked to add an existing musician to an existing band");
-
-
+            case "7" -> {
+                System.out.println("You picked to add a Album");
+                print("Enter the album name.");
+                String albumName = in.nextLine();
+                print("Info about the album.");
+                String infoText = in.nextLine();
+                print("Wich year did the album release?");
+                int yearOfRelease = in.nextInt();
+                Album userCreateAlbum = new Album(albumName, infoText, yearOfRelease);
+                Main.albums.add(userCreateAlbum);
+                print(userCreateAlbum + "\n");
+            }
+            case "8" -> print("List of current albums:" + Main.albums + "\n");
+            
+            case "9" -> {print("Remove one of the current existing albums.\nEnter the albums name.");
+                String albumName = in.nextLine();
+                for (int i = Main.albums.size()-1; i >= 0; i--){
+                    if (Main.albums.get(i).albumName.equals(albumName)){
+                        Main.albums.remove(i);
+                    }
+                }
+            }
             case "quit" -> System.exit(1); //Exits the program.
 
             default -> menu("Not a valid input. Choose an option"); //<- sout If not a valid input.
