@@ -1,16 +1,16 @@
 import java.util.Scanner;
 
+
 public class Menu {
-    private static int i;
 
     public static void print(String toPrint){
         System.out.println(toPrint);
     }
-    public static void menu(String menuDisplay) {
+    public static void menu(String menuDisplay) throws Exception{
         Scanner in = new Scanner(System.in);
         System.out.println(menuDisplay);
 
-        switch (menuDisplay) {
+        switch (in.nextLine()) {
             case "1" -> {
                 print("You picked to add a band\n");
                 print("What is the bands name?");
@@ -21,22 +21,20 @@ public class Menu {
                 String yearOfFormation = in.nextLine();
                 print("Which year did the band disband? If they have not disbanded yet, press enter.");
                 String yearOfDisband = in.nextLine();
-                Band newBand = new Band(bandName, infoText, yearOfFormation, yearOfDisband);
-                Main.bands.add(newBand);
-                print(bandName + " has been added.");
+               Band userCreateBand = new Band(bandName, infoText, yearOfFormation, yearOfDisband);
+                Band.bands.add(userCreateBand);
+                print("You have created" + userCreateBand + "\n");
 
             }
 
-            case "2" -> {
-                System.out.println("List of current bands:\n" + Main.bands);
-            }
+            case "2" -> System.out.println("List of current bands:\n" + Main.bands);
+
             case "3" -> {
                 print("Remove an existing band.\nEnter the bands name.");
                 String bandName = in.nextLine();
                 for (int i = Main.bands.size()-1; i >= 0; i--){
                     if (Main.bands.get(i).getBandName().equals(bandName))
                         Main.bands.remove(i);
-                    print(i + " has been removed");
                     }
             }
 
@@ -95,9 +93,8 @@ public class Menu {
                     }
                 }
             }
-            case "quit" -> System.exit(1); //Exits the program.
-
             default -> menu("Not a valid input. Choose an option"); //<- sout If not a valid input.
+            case "quit" -> System.exit(1); //Exits the program.
         }
     }
 }

@@ -102,7 +102,7 @@ public class Musician {
         return "\nName: " + firstName + " " + lastName + "\nDate of birth: " + dateOfBirth + "\nDate of death: " + dateOfDeath + "\nAbout the musician: " + infoText + "\nInstrument the musician is playing: " + instrument + "\n";
     }
 
-    public void joinBand(Band bandToJoin){
+   /* public void joinBand(Band bandToJoin){
         if (!bands.contains(bandToJoin)){
             bands.add(bandToJoin);
         }
@@ -116,6 +116,6 @@ public class Musician {
         if (bandToLeave.musicians.contains(this)){
             bandToLeave.removeMusicianFromBand(this);
         }
-    }
+    }*/
 
 }
