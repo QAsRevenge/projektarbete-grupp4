@@ -1,12 +1,16 @@
+import com.google.gson.annotations.JsonAdapter;
 import java.util.ArrayList;
 
-public class Album {
+public class Album extends Item {
+
+    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Band> albums = new ArrayList<>();
+
+    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Band> bands = new ArrayList<>();
+    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Album> albumList = new ArrayList<>();
 
-    // Add field and method for solo albums?
-    // Album can have a single musician or a whole band
     public String albumName;
     public String infoText;
     public int yearOfRelease;
@@ -16,23 +20,17 @@ public class Album {
 
         return "\nAlbum: " + albumName + "\nInfo: " + infoText + "\nYear of release: " + yearOfRelease;
     }
-    public Album(String albumName, String infoText, int yearOfRelease) {
+    public Album(String albumName, String infoText, Integer yearOfRelease) {
         this.albumName = albumName;
         this.infoText = infoText;
         this.yearOfRelease = yearOfRelease;
+        ItemStore.add(this);
     }
 
-   /* public void addMusicianToAlbum(String MusicianToAdd){
-
-        if (!MusicianToAdd.album.contains(this)){
-            System.out.println("hi");
-        }
-    }
-    */
 
     //add album in the List
     public void addAlbum(Album album){
-    albumList.add(album);
+        albumList.add(album);
     }
     public void removeAlbum(Album album){
         albumList.remove(album);
@@ -55,6 +53,62 @@ public class Album {
         albumToRemove.removeAlbumFromBand(this);
     }
         albums.remove(albumToRemove);
+    }
+
+    public ArrayList<Band> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(ArrayList<Band> albums) {
+        this.albums = albums;
+    }
+
+    public ArrayList<Band> getBands() {
+        return bands;
+    }
+
+    public void setBands(ArrayList<Band> bands) {
+        this.bands = bands;
+    }
+
+    public ArrayList<Album> getAlbumList() {
+        return albumList;
+    }
+
+    public void setAlbumList(ArrayList<Album> albumList) {
+        this.albumList = albumList;
+    }
+
+    public String getAlbumName() {
+        return albumName;
+    }
+
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
+    }
+
+    public String getInfoText() {
+        return infoText;
+    }
+
+    public void setInfoText(String infoText) {
+        this.infoText = infoText;
+    }
+
+    public String getYearOfRelease() {
+        return yearOfRelease;
+    }
+
+    public void setYearOfRelease(String yearOfRelease) {
+        this.yearOfRelease = yearOfRelease;
+    }
+
+    public String getSoloAlbum() {
+        return soloAlbum;
+    }
+
+    public void setSoloAlbum(String soloAlbum) {
+        this.soloAlbum = soloAlbum;
     }
 }
 

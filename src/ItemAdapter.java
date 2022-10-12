@@ -5,6 +5,7 @@ import java.io.IOException;
 
 public class ItemAdapter extends TypeAdapter<Item> {
 
+
   @Override
   public void write(JsonWriter out, Item item) throws IOException {
     out.beginObject();

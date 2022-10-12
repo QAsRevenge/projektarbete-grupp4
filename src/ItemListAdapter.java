@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class ItemListAdapter extends TypeAdapter<ArrayList<Item>> {
 
+
   @Override
   public void write(JsonWriter out, ArrayList<Item> list) throws IOException {
     out.beginArray();

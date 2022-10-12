@@ -1,17 +1,23 @@
+import com.google.gson.annotations.JsonAdapter;
 import java.util.ArrayList;
 
-public class Musician {
+public class Musician extends Item{
 
     // Fields specific to musicians
     public String firstName;
-
     public String lastName;
     public String infoText;
     public String dateOfBirth;
     public String dateOfDeath;
     public String instrument;
+
+    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Band> bands = new ArrayList<>();
- public ArrayList<Album> albums = new ArrayList<>();
+
+    @JsonAdapter(ItemListAdapter.class)
+    public ArrayList<Album> albums = new ArrayList<>();
+
+    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Musician> musicianList = new ArrayList<>();
 
     // Constructor
@@ -22,7 +28,7 @@ public class Musician {
         this.dateOfDeath = dateOfDeath;
         this.infoText = infoText;
         this.instrument = instrument;
-
+        ItemStore.add(this);
     }
 
     public String getLastName() {
@@ -81,6 +87,10 @@ public class Musician {
         showMusicianList();
     }
 
+    public void musicianAge(){
+
+    }
+
 
     public void searchMusicianByName(String firstName, String lastName){
         for (Musician musician: musicianList){
@@ -102,19 +112,19 @@ public class Musician {
         return "\nName: " + firstName + " " + lastName + "\nDate of birth: " + dateOfBirth + "\nDate of death: " + dateOfDeath + "\nAbout the musician: " + infoText + "\nInstrument the musician is playing: " + instrument + "\n";
     }
 
-    public void joinBand(Band bandToJoin){
+   /* public void joinBand(Band bandToJoin){
         if (!bands.contains(bandToJoin)){
             bands.add(bandToJoin);
         }
         if (!bandToJoin.musicians.contains(this)){
             ArrayList<String>emptyList = new ArrayList<>();
-            bandToJoin.addMusicianToBand(this, "1943", emptyList );
+            bandToJoin.addMusicianToBand(this, "1943", emptyList);
         }
-    }
+    }*/
     public void leaveBand(Band bandToLeave){
         bands.remove(bandToLeave);
         if (bandToLeave.musicians.contains(this)){
-            bandToLeave.removeMusicianFromBand(this);
+            bandToLeave.removeMusicianFromBand(this, bandToLeave);
         }
     }
 

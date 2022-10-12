@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Input {
 
+
     public static void print(String toPrint){
         System.out.println(toPrint);
     }

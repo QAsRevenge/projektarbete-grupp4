@@ -1,13 +1,20 @@
+import com.google.gson.annotations.JsonAdapter;
+
 import java.util.ArrayList;
 
-public class Band{
+public class Band extends Item{
     private final String bandName;
     private final String infoText;
     private final String yearOfFormation;
     private final String yearOfDisband;
+    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Album> albums = new ArrayList<>();
+    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Musician> musicians = new ArrayList<>();
+    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Musician> pastMusicians = new ArrayList<>();
+
+    @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Band> bands = new ArrayList<>();
 
     public Band(String bandName, String infoText, String yearOfFormation, String yearOfDisband) {
@@ -15,6 +22,7 @@ public class Band{
         this.infoText = infoText;
         this.yearOfFormation = yearOfFormation;
         this.yearOfDisband = yearOfDisband;
+        ItemStore.add(this);
     }
 
     public void addAlbum(Album addAlbum){
