@@ -32,13 +32,13 @@ public class Menu {
             }
             case "3" -> {
                 print("Remove an existing band.\nEnter the bands name.");
-                String bandName = in.nextLine();
-                /*if (!ItemStore.lists.bands.contains(bandName)) {
-                    print("That band is not in the list.");
-                } else {
-                  //  ItemStore.lists.bands.remove(bandName);
-                    print(bandName + " has been removed.");
-                }*/
+                System.out.println(Main.bands);
+                String bandToRemove = in.nextLine();
+                for (int i = Main.bands.size() - 1; i >= 0; i--) {
+                    if (Main.bands.get(i).getBandName().equals(bandToRemove)) {
+                        Main.bands.remove(i);
+                    }
+                }
             }
 
             case "4" -> {
