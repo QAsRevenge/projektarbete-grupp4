@@ -45,9 +45,9 @@ public class Menu extends Item {
                 }
 
             case "4" -> {
-                System.out.printf("%s%n%s%n", "You picked to add a Musician. Great!", "Now pick the musicians first name:");
+                System.out.printf("%s%n%s%n", "You picked to add a Musician. Great!", "What is the musicians first name?:");
                 String firstName = in.nextLine();
-                print("Pick the musician last name:");
+                print("What is the musicians last name?:");
                 String lastName = in.nextLine();
                 print("Which date was the musician born?:");
                 String dateOfBirth = in.nextLine();
@@ -78,12 +78,12 @@ public class Menu extends Item {
             }
             //Album
             case "7" -> {
-                System.out.println("You picked to add a Album");
+                System.out.println("You picked to add an Album");
                 print("Enter the album name.");
                 String albumName = in.nextLine();
                 print("Info about the album.");
                 String infoText = in.nextLine();
-                print("Wich year did the album release?");
+                print("Which year did the album release?");
                 int yearOfRelease = in.nextInt();
                 Album userCreateAlbum = new Album(albumName, infoText, yearOfRelease);
                 Main.albums.add(userCreateAlbum);
