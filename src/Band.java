@@ -79,13 +79,13 @@ public class Band extends Item{
         }
     }
 
-    public void removeMusicianFromBand(Musician musicianToRemove, Band band) {
+   /* public void removeMusicianFromBand(Musician musicianToRemove, Band band) {
         if (band.getMusicians().contains(musicianToRemove)) {
             musicianToRemove.leaveBand(band);
         }
         musicians.remove(musicianToRemove);
     }
-
+*/
     public void searchBandByName(String bandName){
         for (Band band: Main.bands){
             if ((band.getBandName().equals(bandName))) {

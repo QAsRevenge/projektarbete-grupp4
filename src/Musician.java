@@ -126,6 +126,6 @@ public class Musician extends Item{
         if (bandToLeave.musicians.contains(this)){
             bandToLeave.removeMusicianFromBand(this, bandToLeave);
         }
-    }
+    }*/
 
 }
