@@ -9,7 +9,6 @@ public class Main extends Item {
     @JsonAdapter(ItemListAdapter.class)
     static ArrayList<Album> albums = new ArrayList<>();
 
-
     public static void main(String[] args) {
         if (!ItemFileHandler.fileExists("data.json")) {
             ItemStore.save("data.json");

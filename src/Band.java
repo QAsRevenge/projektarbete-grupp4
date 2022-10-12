@@ -14,15 +14,13 @@ public class Band extends Item{
     @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Musician> pastMusicians = new ArrayList<>();
 
-    @JsonAdapter(ItemListAdapter.class)
-    public ArrayList<Band> bands = new ArrayList<>();
 
     public Band(String bandName, String infoText, String yearOfFormation, String yearOfDisband) {
         this.bandName = bandName;
         this.infoText = infoText;
         this.yearOfFormation = yearOfFormation;
         this.yearOfDisband = yearOfDisband;
-        ItemStore.add(this);
+        ItemStore.add(this); // adds the Musician to ItemStore.lists.musicians
     }
 
     public void addAlbum(Album addAlbum){
@@ -56,11 +54,12 @@ public class Band extends Item{
 
 
     public void addBandToAlbum(Band band, Album albumToAdd) {
-        if (!band.getAlbums().contains(albumToAdd)) {
+        if (!getAlbums().contains(albumToAdd)) {
             band.addAlbum(albumToAdd);
             System.out.println("The album " + albumToAdd + " has been added to the band " + band);
         }
         if (!albums.contains(albumToAdd)) {
+            // albumToAdd.band = this;
             albums.add(albumToAdd);
         }
     }
@@ -70,13 +69,14 @@ public class Band extends Item{
         }
     }
     public void addMusicianToBand(Band band, Musician musicianToAdd) {
-        if (!band.getMusicians().contains(musicianToAdd)) {
+        if (!getMusicians().contains(musicianToAdd)) {
             band.addMusician(musicianToAdd);
             System.out.println("The musician " + musicianToAdd + " has been added to the band " + band);
         }
         if (!musicians.contains(musicianToAdd)) {
             musicians.add(musicianToAdd);
         }
+        // musicianToAdd.addBand(this)
     }
 
    /* public void removeMusicianFromBand(Musician musicianToRemove, Band band) {

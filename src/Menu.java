@@ -20,8 +20,7 @@ public class Menu extends Item {
                     String yearOfFormation = in.nextLine();
                     print("Which year did the band disband? If they have not disbanded yet, press enter.");
                     String yearOfDisband = in.nextLine();
-                    Band newBand = new Band(bandName, infoText, yearOfFormation, yearOfDisband);
-                    Main.bands.add(newBand);
+                    new Band(bandName, infoText, yearOfFormation, yearOfDisband);
                     print(bandName + " has been added.");
 
                 }

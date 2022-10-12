@@ -11,6 +11,8 @@ public class Musician extends Item{
     public String dateOfDeath;
     public String instrument;
 
+    // public ArrayList<Band> myBands = new ArrayList<>();
+
     @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Band> bands = new ArrayList<>();
 

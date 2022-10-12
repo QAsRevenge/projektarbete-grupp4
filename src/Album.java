@@ -5,7 +5,6 @@ public class Album extends Item {
 
     @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Band> albums = new ArrayList<>();
-
     @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Band> bands = new ArrayList<>();
     @JsonAdapter(ItemListAdapter.class)
@@ -29,26 +28,29 @@ public class Album extends Item {
 
 
     //add album in the List
-    public void addAlbum(Album album){
-        albumList.add(album);
+    //public void addAlbum(Album album){
+        //albumList.add(album);
     }
-    public void removeAlbum(Album album){
-        albumList.remove(album);
-    }
-    
-    //public void addSoloAlbum(SoloAlbum album){
-      //  albumList.add(soloAlbum);
-  //  }
+    //public void removeAlbum(Album album){
+        //albumList.remove(album);
+   // }
 
-   /* public void addAlbumToBand(Band albumToAdd){
+
+    /*
+    public void addSoloAlbum(Album soloAlbum){
+        albumList.add(soloAlbum);
+    }
+
+
+    public void addAlbumToBand(Band albumToAdd){
         if(!albumToAdd.bands.contains(this)){
             albumToAdd.addBandToAlbum(this);
         }
         if (!albums.contains(albumToAdd)) {
             albums.add(albumToAdd);
-    }*/
+    }
 
-}/*   public void removeAlbumFromBand(Album albumToRemove){
+}   public void removeAlbumFromBand(Album albumToRemove){
     if(albumToRemove.bands.contains(this)){
         albumToRemove.removeAlbumFromBand(this);
     }
