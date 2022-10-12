@@ -1,14 +1,15 @@
 import java.util.ArrayList;
 
 public class Band{
-    private final String bandName;
+    public final String bandName;
     private final String infoText;
     private final String yearOfFormation;
     private final String yearOfDisband;
     public ArrayList<Album> albums = new ArrayList<>();
     public ArrayList<Musician> musicians = new ArrayList<>();
     public ArrayList<Musician> pastMusicians = new ArrayList<>();
-    public ArrayList<Band> bands = new ArrayList<>();
+    public static ArrayList<Band> bands = new ArrayList<>();
+
 
     public Band(String bandName, String infoText, String yearOfFormation, String yearOfDisband) {
         this.bandName = bandName;
@@ -71,13 +72,13 @@ public class Band{
         }
     }
 
-    public void removeMusicianFromBand(Musician musicianToRemove, Band band) {
+   /* public void removeMusicianFromBand(Musician musicianToRemove, Band band) {
         if (band.getMusicians().contains(musicianToRemove)) {
             musicianToRemove.leaveBand(band);
         }
         musicians.remove(musicianToRemove);
     }
-
+*/
     public void searchBandByName(String bandName){
         for (Band band: Main.bands){
             if ((band.getBandName().equals(bandName))) {

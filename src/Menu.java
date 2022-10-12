@@ -33,9 +33,9 @@ public class Menu {
             case "3" -> {
                 print("Remove an existing band.\nEnter the bands name.");
                 System.out.println(Main.bands);
-                String bandToRemove = in.nextLine();
+                String bandName = in.nextLine();
                 for (int i = Main.bands.size() - 1; i >= 0; i--) {
-                    if (Main.bands.get(i).getBandName().equals(bandToRemove)) {
+                    if (Main.bands.get(i).bandName.equals(bandName)) {
                         Main.bands.remove(i);
                     }
                 }
