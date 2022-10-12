@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
-
 public class Menu {
+    private static int i;
 
-    public static void print(String toPrint){
+    public static void print(String toPrint) {
         System.out.println(toPrint);
     }
-    public static void menu(String menuDisplay) throws Exception{
+    public static void menu(String menuDisplay) {
         Scanner in = new Scanner(System.in);
         System.out.println(menuDisplay);
 
@@ -21,21 +21,24 @@ public class Menu {
                 String yearOfFormation = in.nextLine();
                 print("Which year did the band disband? If they have not disbanded yet, press enter.");
                 String yearOfDisband = in.nextLine();
-               Band userCreateBand = new Band(bandName, infoText, yearOfFormation, yearOfDisband);
-                Band.bands.add(userCreateBand);
-                print("You have created" + userCreateBand + "\n");
+                Band newBand = new Band(bandName, infoText, yearOfFormation, yearOfDisband);
+                Main.bands.add(newBand);
+                print(bandName + " has been added.");
 
             }
 
-            case "2" -> System.out.println("List of current bands:\n" + Main.bands);
-
+            case "2" -> {
+                System.out.println("List of current bands:\n" + Main.bands);
+            }
             case "3" -> {
                 print("Remove an existing band.\nEnter the bands name.");
                 String bandName = in.nextLine();
-                for (int i = Main.bands.size()-1; i >= 0; i--){
-                    if (Main.bands.get(i).getBandName().equals(bandName))
-                        Main.bands.remove(i);
-                    }
+                /*if (!ItemStore.lists.bands.contains(bandName)) {
+                    print("That band is not in the list.");
+                } else {
+                  //  ItemStore.lists.bands.remove(bandName);
+                    print(bandName + " has been removed.");
+                }*/
             }
 
             case "4" -> {
@@ -84,7 +87,7 @@ public class Menu {
                 print(userCreateAlbum + "\n");
             }
             case "8" -> print("List of current albums:" + Main.albums + "\n");
-            
+
             case "9" -> {print("Remove one of the current existing albums.\nEnter the albums name.");
                 String albumName = in.nextLine();
                 for (int i = Main.albums.size()-1; i >= 0; i--){
@@ -93,8 +96,9 @@ public class Menu {
                     }
                 }
             }
-            default -> menu("Not a valid input. Choose an option"); //<- sout If not a valid input.
             case "quit" -> System.exit(1); //Exits the program.
+
+            default -> menu("Not a valid input. Choose an option");
         }
     }
 }
