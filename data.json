@@ -1,48 +1,8 @@
 {
   "bands": [
-    {
-      "bandName": "Hampus",
-      "infoText": "Great guys",
-      "yearOfFormation": "1998",
-      "yearOfDisband": "",
-      "albums": [],
-      "musicians": [],
-      "pastMusicians": [],
-      "id": "Band1"
-    },
-    {
-      "bandName": "Armin",
-      "infoText": "Great guys too",
-      "yearOfFormation": "2001",
-      "yearOfDisband": "",
-      "albums": [],
-      "musicians": [],
-      "pastMusicians": [],
-      "id": "Band2"
-    }
   ],
   "musicians": [
-    {
-      "firstName": "Olof Stensson",
-      "lastName": "Stensson",
-      "infoText": "Great pianist.",
-      "dateOfBirth": "1978",
-      "dateOfDeath": "",
-      "instrument": "Piano.",
-      "bands": [],
-      "albums": [],
-      "musicianList": [],
-      "id": "Musician1"
-    }
   ],
   "albums": [
-    {
-      "bands": [],
-      "albumList": [],
-      "albumName": "Abba",
-      "infoText": "Great album",
-      "yearOfRelease": 1978,
-      "id": "Album1"
-    }
   ]
 }

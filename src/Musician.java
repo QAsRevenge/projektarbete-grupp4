@@ -121,11 +121,12 @@ public class Musician extends Item{
             bandToJoin.addMusicianToBand(this, "1943", emptyList);
         }
     }*/
+    /*
     public void leaveBand(Band bandToLeave){
         bands.remove(bandToLeave);
         if (bandToLeave.musicians.contains(this)){
             bandToLeave.removeMusicianFromBand(this, bandToLeave);
-        }
-    }*/
+        }*/
+    }
 
-}
+
