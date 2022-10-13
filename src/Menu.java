@@ -100,7 +100,9 @@ public class Menu extends Item {
                     ItemStore.save("data.json");
                     ItemStore.log();
                 }
-                case "quit" -> System.exit(1); //Exits the program.
+
+                case "quit" ->
+                System.exit(1); //Exits the program.
 
                 default -> menu("Not a valid input. Choose an option");
             }
