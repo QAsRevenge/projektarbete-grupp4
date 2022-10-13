@@ -11,8 +11,7 @@ public class Menu extends Item {
             print(menuDisplay);
             switch (in.nextLine()) {
                 case "1" -> {
-                    print("You picked to add a band\n");
-                    print("What is the bands name?");
+                    System.out.printf("%s%n%s%n", "You picked to add a band\n", "What is the bands name?");
                     String bandName = in.nextLine();
                     print("Enter information about the band.");
                     String infoText = in.nextLine();
@@ -64,8 +63,7 @@ public class Menu extends Item {
 
             case "5" -> print("List of current musicians:" + Main.musicians + "\n");
             case "6" -> {
-                print("Remove one of the current existing musicians.\nEnter the musicians first name.");
-                //print("Enter the musicians first name.");
+                System.out.printf("%s%n%s%n", "Remove on of the current existing musicians.", "\nEnter the musicians first name.");
                 String firstName = in.nextLine();
                 print("Enter the musicians last name.");
                 String lastName = in.nextLine();
@@ -77,8 +75,7 @@ public class Menu extends Item {
             }
             //Album
             case "7" -> {
-                System.out.println("You picked to add an Album");
-                print("Enter the album name.");
+                System.out.printf("%s%n%s%n", "You picked to add an album", "What is the albums name?");
                 String albumName = in.nextLine();
                 print("Info about the album.");
                 String infoText = in.nextLine();
