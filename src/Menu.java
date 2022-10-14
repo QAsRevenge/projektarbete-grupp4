@@ -99,11 +99,11 @@ public class Menu extends Item {
                         }
                     }
                 }
-                case "10" -> {
+                /*case "10" -> {
                     ItemStore.save("data.json");
                     ItemStore.log();
-                }
-                case "11" -> {  //DO NOT MODIFY THIS CASE BELOW! If you mess it up its on you.
+                }*/
+                case "10" -> {  //DO NOT MODIFY THIS CASE BELOW! If you mess it up its on you.
                     System.out.println("Which band do you want a musician to join?");
                     System.out.println("List: " + Main.bands);
                     Band band = findBand(in.nextLine());
@@ -121,7 +121,7 @@ public class Menu extends Item {
                     System.out.println(musician.firstName + " has been added to " + band.getBandName());
                 }              //DO NOT MODIFY THIS CASE OVER! If you mess it up its on you.
 
-                case "12" -> { //DO NOT MODIFY THIS CASE BELOW! If you mess it up its on you.
+                case "11" -> { //DO NOT MODIFY THIS CASE BELOW! If you mess it up its on you.
                     System.out.println("Which album do you want a musician to join?");
                     System.out.println("List: " + Main.albums);
                     Album album = findAlbum(in.nextLine());
@@ -139,7 +139,7 @@ public class Menu extends Item {
                     System.out.println(musician.firstName + " has been added to " + album.getFirstName());
                 }              //DO NOT MODIFY THIS CASE OVER! If you mess it up its on you.
 
-                case "13" -> { //DO NOT MODIFY THIS CASE OVER! If you mess it up its on you.
+                case "12" -> { //DO NOT MODIFY THIS CASE OVER! If you mess it up its on you.
                     System.out.println("Which band do you want a musician to get removed from?");
                     System.out.println("List: " + Main.bands);
                     Band band = findBand(in.nextLine());
@@ -157,7 +157,7 @@ public class Menu extends Item {
                     System.out.println(musician.firstName + " has been removed from " + band.getBandName());
                 }              //DO NOT MODIFY THIS CASE OVER! If you mess it up its on you.
 
-                case "14" -> { //DO NOT MODIFY THIS CASE BELOW! If you mess it up its on you.
+                case "13" -> { //DO NOT MODIFY THIS CASE BELOW! If you mess it up its on you.
                     System.out.println("Which album do you want a musician to get removed from?");
                     System.out.println("List: " + Main.albums);
                     Album album = findAlbum(in.nextLine());
@@ -174,7 +174,10 @@ public class Menu extends Item {
                     album.removeMusician(musician);
                     System.out.println(musician.firstName + " has been removed from " + album.getFirstName());
                 }           //DO NOT MODIFY THIS CASE OVER! If you mess it up its on you.
-
+                case "14" -> {
+                    ItemStore.save("data.json");
+                    ItemStore.log();
+                }
                 case "quit" -> System.exit(1); //Exits the program.
 
                 default -> menu("Not a valid input. Choose an option");
