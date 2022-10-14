@@ -55,7 +55,7 @@ public class Menu extends Item {
                 String infoText = in.nextLine();
                 print("Which instrument does the musician use? answer:");
                 String instrument = in.nextLine();
-                Musician userCreateMusician = new Musician(firstName, lastName, infoText, dateOfBirth, dateOfDeath , instrument);
+                Musician userCreateMusician = new Musician(firstName, lastName, infoText, dateOfBirth, dateOfDeath, instrument);
                 Main.musicians.add(userCreateMusician);
                 print(userCreateMusician + "\n");
 

@@ -36,7 +36,7 @@ public class ItemStore {
         return
                 className.equals("Album") ? new Album("", "", null) :
                         className.equals("Band") ? new Band("", "", "", "") :
-                                className.equals("Musician") ? new Musician("","","","","","") :
+                                className.equals("Musician") ? new Musician("","","","","", "") :
                                         null;
     }
 

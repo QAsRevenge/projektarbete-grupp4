@@ -1,5 +1,6 @@
 import com.google.gson.annotations.JsonAdapter;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Musician extends Item{
 
@@ -90,7 +91,21 @@ public class Musician extends Item{
     }
 
     public void musicianAge(){
-
+        // If the dateOfDeath is skipped (as in an empty string)
+        // it should go in to the if statement directly below.
+        // Otherwise, it should go in to the else statement.
+        // Currently, does not show up in the musicians list, needs to be added.
+        if (dateOfDeath == ""){
+            int currentYear = 2022;
+            int dateOfBirthInt = Integer.parseInt(dateOfBirth);
+            int musiciansAge = currentYear - dateOfBirthInt;
+            String musiciansAgeString = String.valueOf(musiciansAge);
+        } else {
+            int dateOfBirthInt = Integer.parseInt(dateOfBirth);
+            int dateOfDeathInt = Integer.parseInt(dateOfDeath);
+            int musiciansAge = dateOfDeathInt - dateOfBirthInt;
+            String musiciansAgeString = String.valueOf(musiciansAge);
+        }
     }
 
 
