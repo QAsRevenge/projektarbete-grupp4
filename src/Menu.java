@@ -1,222 +1,401 @@
-import java.util.List;
 import java.util.Scanner;
 
-public class Menu extends Item {
-    public static void print(String toPrint) {
-        System.out.println(toPrint);
+public class Menu {
+
+    public static void menu() {
+        subMenu(Input.menu("----- Welcome to your library! -----\nPick a category below:", "Band", "Album", "Musician", "Save", "Exit"));
     }
 
-    public void menu(String menuDisplay) {
+    public static void subMenu(String mainChoice) {
+        switch (mainChoice) {
+            case "Band" ->
+                    subMenuChoices(Input.menu("What would you like to do?", "Add a band", "Remove a band", "Add a musician to a band", "Remove a musician from a band", "Add an album to a band", "Remove an album from a band", "Display current list of bands"), "Band");
+            case "Album" ->
+                    subMenuChoices(Input.menu("What would you like to do?", "Add an album", "Remove an album", "Add a musician to an album", "Remove a musician from an album", "Display current list of albums"), "Album");
+            case "Musician" ->
+                    subMenuChoices(Input.menu("What would you like to do?", "Add a musician", "Remove a musician", "Add a musician to a band", "Remove a musician from a band", "Add an album to a musician", "Remove an album from a musician", "Display current list of musicians"), "Musician");
+            case "Save" -> {
+                ItemStore.save("data.json");
+                System.out.println("Your library has been saved, returning to the main menu.");
+                Input.sleep(2000);
+                menu();
+            }
+            case "Exit" -> {
+                System.exit(1337);
+            }
+            default -> menu();
+        }
+    }
+
+
+    public static void subMenuChoices(String subChoice, String mainChoice) {
         Scanner in = new Scanner(System.in);
-        while (true) {
-            print(menuDisplay);
-            switch (in.nextLine()) {
-                case "1" -> {
-                    print("You picked to add a band\n");
-                    print("What is the bands name?");
-                    String bandName = in.nextLine();
-                    print("Enter information about the band.");
-                    String infoText = in.nextLine();
-                    print("Which year did the band form?");
-                    String yearOfFormation = in.nextLine();
-                    print("Which year did the band disband? If they have not disbanded yet, press enter.");
-                    String yearOfDisband = in.nextLine();
-                   Band band = new Band(bandName, infoText, yearOfFormation, yearOfDisband);
-                    print(bandName + " has been added.");
-                        Main.bands.add(band);
-                }
-
-                case "2" -> {
-                    if (Main.bands.isEmpty())
-                        print("There are no bands in the list.");
-                    else {
-                        System.out.println("List of current bands:\n" + Main.bands);
+        switch (mainChoice) {
+            case "Band" -> {
+                switch (subChoice) {
+                    case "Add a band": {
+                        Input.print("Enter the bands name");
+                        String bandName = in.nextLine();
+                        Input.print("Enter information about the band:");
+                        String infoText = in.nextLine();
+                        Input.print("Which year did the band form?");
+                        String yearOfFormation = in.nextLine();
+                        Input.print("Which year did the band disband? If they have not disbanded yet, press enter.");
+                        String yearOfDisband = in.nextLine();
+                        new Band(bandName, infoText, yearOfFormation, yearOfDisband);
+                        Input.print(bandName + " has been added.");
+                        menu();
                     }
-                }
-                case "3" -> {
-                    print("Remove an existing band.\nEnter the bands name.");
-                    System.out.println(Main.bands);
-                    String bandToRemove = in.nextLine();
-                    for (int i = Main.bands.size() - 1; i >= 0; i--) {
-                        if (Main.bands.get(i).getBandName().equals(bandToRemove)) {
-                            Main.bands.remove(i);
+                    case "Remove a band": {
+                        Input.print("Would you like to see the current list of bands in the library?\n Enter Y/N.");
+                        String yesOrNo = in.nextLine();
+                        if (yesOrNo.equals("Y") && ItemStore.lists.bands.isEmpty()) {
+                            Input.print("The list is currently empty.\n\n");
+                            Input.print("Go back to the main menu? Enter Y to go back, N to exit the program.");
+                            String yesOrNoAgain = in.nextLine();
+                            if (yesOrNoAgain.equals("Y"))
+                                menu();
+                            else {
+                                System.exit(2);
+                            }
+                        } else if (yesOrNo.equals("Y")) {
+                            Input.print("------ Your current list of bands ------");
+                            Band.showAllBands();
+                            Input.print("Enter the name of the band you would like to remove");
+                            String bandToRemove = in.nextLine();
+                            for (int i = ItemStore.lists.bands.size() - 1; i >= 0; i--) {
+                                if (ItemStore.lists.bands.get(i).getBandName().equals(bandToRemove)) {
+                                    ItemStore.lists.bands.remove(i);
+                                    Input.print(bandToRemove + " has been removed.");
+                                    menu();
+                                }
+                            }
+                        } else if (yesOrNo.equals("N")) {
+                            Input.print("Enter the name of the band you would like to remove");
+                            String bandToRemove = in.nextLine();
+                            for (int y = ItemStore.lists.bands.size() - 1; y >= 0; y--) {
+                                if (ItemStore.lists.bands.get(y).getBandName().equals(bandToRemove)) {
+                                    ItemStore.lists.bands.remove(y);
+                                    Input.print(bandToRemove + " has been removed");
+                                    menu();
+                                }
+                            }
                         }
                     }
+                    case "Add a musician to a band": {
+                        Input.print("------ Your current list of bands ------");
+                        Band.showAllBands();
+                        Input.print("Which band would you like to add a musician to?");
+                        Band bandToAdd = Band.checkBands(in.nextLine());
+                        Input.print("------ Your current list of musicians ------");
+                        Musician.showAllMusicians();
+                        Input.print("Which musician would you like to add to the band?");
+                        Musician musicianToAdd = Musician.checkMusicians(in.nextLine());
+                        assert bandToAdd != null;
+                        bandToAdd.addMusicianToBand(bandToAdd, musicianToAdd);
+                        assert musicianToAdd != null;
+                        Input.print(musicianToAdd.getName() + " has been added to " + bandToAdd.getBandName());
+                        menu();
+                    }
+                    case "Remove a musician from a band": {
+                        Input.print("------ Your current list of bands ------");
+                        Band.showAllBands();
+                        Input.print("Which band would you like to remove a musician from?");
+                        Band band = Band.checkBands(in.nextLine());
+                        Input.print("------ Your current list of musicians ------");
+                        Musician.showAllMusicians();
+                        Input.print("Which musician would you like to remove from the band?");
+                        Musician musicianToRemove = Musician.checkMusicians(in.nextLine());
+                        assert band != null;
+                        band.removeMusicianFromBand(musicianToRemove, band);
+                        assert musicianToRemove != null;
+                        Input.print(musicianToRemove.getName() + " has been removed from " + band.getBandName());
+                        menu();
+                    }
+                    case "Add an album to a band": {
+                        Input.print("------ Your current list of bands ------");
+                        Band.showAllBands();
+                        Input.print("Which band would you like to add an album to?");
+                        Band band = Band.checkBands(in.nextLine());
+                        Input.print("------ Your current list of albums ------");
+                        Album.showAllAlbums();
+                        Input.print("Which album would you like to add to the band?");
+                        Album album = Album.checkAlbums(in.nextLine());
+                        assert band != null;
+                        band.addBandToAlbum(band, album);
+                        assert album != null;
+                        Input.print(album.getAlbumName() + " has been added to " + band.getBandName());
+                        menu();
+                    }
+                    case "Remove an album from a band": {
+                        Input.print("------ Your current list of bands ------");
+                        Band.showAllBands();
+                        Input.print("Which band would you like to remove an album from?");
+                        Band band = Band.checkBands(in.nextLine());
+                        Input.print("------ Your current list of albums ------");
+                        Album.showAllAlbums();
+                        Input.print("Which album would you like to remove from the band?");
+                        Album album = Album.checkAlbums(in.nextLine());
+                        assert band != null;
+                        band.removeBandFromAlbum(band, album);
+                        assert album != null;
+                        Input.print(album.getAlbumName() + " has been removed from " + band.getBandName());
+                        menu();
+                    }
+                    case "Display current list of bands": {
+                        Band.showAllBands();
+                        Input.print("Would you like to see more information about a band? Enter the bands name: ");
+                        Band bandToDisplay = Band.checkBands(in.nextLine());
+                        if (bandToDisplay == null) {
+                            Input.print("That band does not exist.");
+                            menu();
+                        } else Band.showBand(bandToDisplay);
+                        menu();
+                    }
                 }
+            }
 
-                case "4" -> {
-                    System.out.printf("%s%n%s%n", "You picked to add a Musician. Great!", "What is the musicians first name?:");
-                    String firstName = in.nextLine();
-                    print("What is the musicians last name?:");
-                    String lastName = in.nextLine();
-                    print("Which date was the musician born?:");
-                    String dateOfBirth = in.nextLine();
-                    print("Which date did the musician die? (Optional):");
-                    String dateOfDeath = in.nextLine();
-                    print("Info about the musician:");
-                    String infoText = in.nextLine();
-                    print("Which instrument does the musician use? answer:");
-                    String instrument = in.nextLine();
-                    Musician userCreateMusician = new Musician(firstName, lastName, infoText, dateOfBirth, dateOfDeath, instrument);
-                    Main.musicians.add(userCreateMusician);
-                    print(userCreateMusician + "\n");
-
-                }
-
-                case "5" -> print("List of current musicians:" + Main.musicians + "\n");
-                case "6" -> {
-                    System.out.printf("%s%n%s%n", "Remove on of the current existing musicians.", "\nEnter the musicians first name.");
-                    String firstName = in.nextLine();
-                    print("Enter the musicians last name.");
-                    String lastName = in.nextLine();
-                    for (int i = Main.musicians.size() - 1; i >= 0; i--) {
-                        if (Main.musicians.get(i).firstName.equals(firstName) && Main.musicians.get(i).lastName.equals(lastName)) {
-                            Main.musicians.remove(i);
+            case "Musician" -> {
+                switch (subChoice) {
+                    case "Add a musician": {
+                        Input.print("Enter the musicians name: ");
+                        String name = in.nextLine();
+                        Input.print("Enter information about the musician: ");
+                        String infoText = in.nextLine();
+                        Input.print("What instrument does/did the musician play?");
+                        String instrument = in.nextLine();
+                        Input.print("What year was the musician born? (YYYY)");
+                        Integer dateOfBirth = in.nextInt();
+                        new Musician(name, dateOfBirth, infoText, instrument);
+                        Input.print(name + " has been added.");
+                        menu();
+                    }
+                    case "Remove a musician": {
+                        Input.print("Would you like to see the current list of musicians in the library?\n Enter Y/N.");
+                        String yesOrNo = in.nextLine();
+                        if (yesOrNo.equals("Y") && ItemStore.lists.musicians.isEmpty()) {
+                            Input.print("The list is currently empty.\n");
+                            Input.print("Go back to the main menu? Enter Y to go back, N to exit the program.");
+                            String yesOrNoAgain = in.nextLine();
+                            if (yesOrNoAgain.equals("Y"))
+                                menu();
+                            else {
+                                System.exit(2);
+                            }
+                        } else if (yesOrNo.equals("Y")) {
+                            Musician.showAllMusicians();
+                            Input.print("Enter the name of the musician you would like to remove");
+                            String musicianToRemove = in.nextLine();
+                            {
+                                for (int i = ItemStore.lists.musicians.size() - 1; i >= 0; i--) {
+                                    if (ItemStore.lists.musicians.get(i).getName().equals(musicianToRemove)) {
+                                        ItemStore.lists.musicians.remove(i);
+                                        Input.print(musicianToRemove + " has been removed.");
+                                        menu();
+                                    }
+                                }
+                            }
+                        } else if (yesOrNo.equals("N")) {
+                            Input.print("Enter the name of the musician you would like to remove");
+                            String musicianToRemove = in.nextLine();
+                            {
+                                for (int y = ItemStore.lists.musicians.size() - 1; y >= 0; y--) {
+                                    if (ItemStore.lists.musicians.get(y).getName().equals(musicianToRemove)) {
+                                        ItemStore.lists.musicians.remove(y);
+                                        Input.print(musicianToRemove + " has been removed");
+                                        menu();
+                                    }
+                                }
+                            }
                         }
                     }
+                    case "Add a musician to a band": {
+                        Input.print("------ Your current list of musicians ------");
+                        Musician.showAllMusicians();
+                        Input.print("Which musician would you like to add a band to?");
+                        Musician musicianToAdd = Musician.checkMusicians(in.nextLine());
+                        Input.print("------ Your current list of bands ------");
+                        Band.showAllBands();
+                        Input.print("Which band would you like to add to the musician?");
+                        Band bandToAdd = Band.checkBands(in.nextLine());
+                        assert musicianToAdd != null;
+                        musicianToAdd.addBandToMusician(musicianToAdd, bandToAdd);
+                        assert bandToAdd != null;
+                        Input.print(musicianToAdd.getName() + " has been added to " + bandToAdd.getBandName());
+                        menu();
+                    }
+                    case "Remove a musician from a band": {
+                        Input.print("------ Your current list of musicians ------");
+                        Musician.showAllMusicians();
+                        Input.print("Which musician would you like to remove a band from?");
+                        Musician musicianToRemove = Musician.checkMusicians(in.nextLine());
+                        Input.print("------ Your current list of bands ------");
+                        Band.showAllBands();
+                        Input.print("Which band would you like to remove from the musician?");
+                        Band bandToRemove = Band.checkBands(in.nextLine());
+                        assert musicianToRemove != null;
+                        musicianToRemove.removeBandFromMusician(musicianToRemove, bandToRemove);
+                        menu();
+                    }
+                    case "Add an album to a musician": {
+                        Input.print("------ Your current list of musicians ------");
+                        Musician.showAllMusicians();
+                        Input.print("Which musician would you like to add an album to?");
+                        Musician musicianToAdd = Musician.checkMusicians(in.nextLine());
+                        Input.print("------ Your current list of albums ------");
+                        Album.showAllAlbums();
+                        Input.print("Which album would you like to add to the band?");
+                        Album albumToAdd = Album.checkAlbums(in.nextLine());
+                        assert musicianToAdd != null;
+                        musicianToAdd.addAlbumToMusician(musicianToAdd, albumToAdd);
+                        menu();
+                    }
+                    case "Remove an album from a musician": {
+                        Input.print("------ Your current list of musicians ------");
+                        Musician.showAllMusicians();
+                        Input.print("Which musician would you like to remove an album from?");
+                        Musician musicianToRemove = Musician.checkMusicians(in.nextLine());
+                        Input.print("------ Your current list of albums ------");
+                        Album.showAllAlbums();
+                        Input.print("Which album would you like to remove from the musician?");
+                        Album albumToRemove = Album.checkAlbums(in.nextLine());
+                        assert musicianToRemove != null;
+                        musicianToRemove.removeAlbumFromMusician(musicianToRemove, albumToRemove);
+                        assert albumToRemove != null;
+                        Input.print(albumToRemove.getAlbumName() + " has been removed from " + musicianToRemove.getName());
+                        menu();
+                    }
+                    case "Display current list of musicians": {
+                        Musician.showAllMusicians();
+                        Input.print("\n");
+                        Input.print("Would you like to see more information about a musician? Enter the musicians name: ");
+                        Musician musicianToDisplay = Musician.checkMusicians(in.nextLine());
+                        if (musicianToDisplay == null) {
+                            Input.print("That musician does not exist.");
+                            menu();
+                        } else Musician.showMusician(musicianToDisplay);
+                        menu();
+                    }
                 }
-                //Album
-                case "7" -> {
-                    System.out.println("You picked to add an Album");
-                    print("Enter the album name.");
-                    String albumName = in.nextLine();
-                    print("Info about the album.");
-                    String infoText = in.nextLine();
-                    print("Which year did the album release?");
-                    int yearOfRelease = in.nextInt();
-                    Album userCreateAlbum = new Album(albumName, infoText, yearOfRelease);
-                    Main.albums.add(userCreateAlbum);
-                    print(userCreateAlbum + "\n");
-                }
-                case "8" -> print("List of current albums:" + Main.albums + "\n");
-
-                case "9" -> {
-                    print("Remove one of the current existing albums.\nEnter the albums name.");
-                    String albumName = in.nextLine();
-                    for (int i = Main.albums.size() - 1; i >= 0; i--) {
-                        if (Main.albums.get(i).albumName.equals(albumName)) {
-                            Main.albums.remove(i);
+            }
+            case "Album" -> {
+                switch (subChoice) {
+                    case "Add an album": {
+                        Input.print("Enter the album name");
+                        String albumName = in.nextLine();
+                        Input.print("Enter information about the album: ");
+                        String infoText = in.nextLine();
+                        Input.print("Which year did the album release?");
+                        int yearOfRelease = in.nextInt();
+                        new Album(albumName, infoText, yearOfRelease);
+                        Input.print(albumName + " has been added.");
+                        menu();
+                    }
+                    case "Remove an album": {
+                        Input.print("Would you like to see the current list of albums in the library?\n Enter Y/N.");
+                        String yesOrNo = in.nextLine();
+                        if (yesOrNo.equals("Y") && ItemStore.lists.albums.isEmpty()) {
+                            Input.print("The list is currently empty.\n\n");
+                            Input.print("Go back to the main menu? Enter Y to go back, N to exit the program.");
+                            String yesOrNoAgain = in.nextLine();
+                            if (yesOrNoAgain.equals("Y"))
+                                menu();
+                            else {
+                                System.exit(2);
+                            }
+                        } else if (yesOrNo.equals("Y")) {
+                            Input.print("------ Your current list of album ------");
+                            Album.showAllAlbums();
+                            Input.print("Enter the name of the album you would like to remove");
+                            String albumToRemove = in.nextLine();
+                            {
+                                for (int i = ItemStore.lists.albums.size() - 1; i >= 0; i--) {
+                                    if (ItemStore.lists.albums.get(i).getAlbumName().equals(albumToRemove)) {
+                                        ItemStore.lists.albums.remove(i);
+                                        Input.print(albumToRemove + " has been removed.");
+                                        menu();
+                                    }
+                                }
+                            }
+                        } else if (yesOrNo.equals("N")) {
+                            Input.print("Enter the name of the album you would like to remove");
+                            String albumToRemove = in.nextLine();
+                            {
+                                for (int y = ItemStore.lists.albums.size() - 1; y >= 0; y--) {
+                                    if (ItemStore.lists.albums.get(y).getAlbumName().equals(albumToRemove)) {
+                                        ItemStore.lists.albums.remove(y);
+                                        Input.print(albumToRemove + " has been removed");
+                                        menu();
+                                    }
+                                }
+                            }
                         }
                     }
-                }
-                /*case "10" -> {
-                    ItemStore.save("data.json");
-                    ItemStore.log();
-                }*/
-                case "10" -> {  //DO NOT MODIFY THIS CASE BELOW! If you mess it up its on you.
-                    System.out.println("Which band do you want a musician to join?");
-                    System.out.println("List: " + Main.bands);
-                    Band band = findBand(in.nextLine());
-                    if (band == null) {
-                        System.out.println("Band could not be found.");
-                        continue;
+                    case "Add a solo album to a musician": {
+                        Input.print("------ Your current list of musicians ------");
+                        Musician.showAllMusicians();
+                        Input.print("Which musician would you like to add a solo album to?");
+                        Musician musicianToAdd = Musician.checkMusicians(in.nextLine());
+                        Input.print("------ Your current list of albums ------");
+                        Album.showAllAlbums();
+                        Input.print("Which album would you like to add to the musician?");
+                        Album albumToAdd = Album.checkAlbums(in.nextLine());
+                        assert albumToAdd != null;
+                        assert musicianToAdd != null;
+                        albumToAdd.addSoloAlbumToMusician(albumToAdd, musicianToAdd);
+                        menu();
                     }
-                    System.out.println("Which musician do you want to join? Name:");
-                    Musician musician = findMusician(in.nextLine());
-                    if (musician == null) {
-                        System.out.println("Musician could not be found.");
-                        continue;
+                    case "Remove a solo album from a musician": {
+                        Input.print("------ Your current list of albums ------");
+                        Album.showAllAlbums();
+                        Input.print("Which album would you like to remove from a musician?");
+                        Album albumToRemove = Album.checkAlbums(in.nextLine());
+                        Input.print("------ Your current list of musicians ------");
+                        Musician.showAllMusicians();
+                        Input.print("Which musician would you like to remove from the album?");
+                        Musician musicianToRemove = Musician.checkMusicians(in.nextLine());
+                        assert albumToRemove != null;
+                        assert musicianToRemove != null;
+                        albumToRemove.removeSoloAlbumFromMusician(albumToRemove, musicianToRemove);
+                        menu();
                     }
-                    band.addMusician(musician);
-                    System.out.println(musician.firstName + " has been added to " + band.getBandName());
-                }              //DO NOT MODIFY THIS CASE OVER! If you mess it up its on you.
 
-                case "11" -> { //DO NOT MODIFY THIS CASE BELOW! If you mess it up its on you.
-                    System.out.println("Which album do you want a musician to join?");
-                    System.out.println("List: " + Main.albums);
-                    Album album = findAlbum(in.nextLine());
-                    if (album == null) {
-                        System.out.println("Album could not be found.");
-                        continue;
+                    case "Display current list of albums": {
+                        Album.showAllAlbums();
+                        Input.print("\n");
+                        Input.print("Would you like to see more information about an album? Enter the albums name: ");
+                        Album albumToDisplay = Album.checkAlbums(in.nextLine());
+                        if (albumToDisplay == null) {
+                            Input.print("That band does not exist.");
+                            menu();
+                        } else Album.showAlbum(albumToDisplay);
+                        menu();
                     }
-                    System.out.println("Which musician do you want to join? Name:");
-                    Musician musician = findMusician(in.nextLine());
-                    if (musician == null) {
-                        System.out.println("Musician could not be found.");
-                        continue;
-                    }
-                    album.addMusician(musician);
-                    System.out.println(musician.firstName + " has been added to " + album.getFirstName());
-                }              //DO NOT MODIFY THIS CASE OVER! If you mess it up its on you.
-
-                case "12" -> { //DO NOT MODIFY THIS CASE OVER! If you mess it up its on you.
-                    System.out.println("Which band do you want a musician to get removed from?");
-                    System.out.println("List: " + Main.bands);
-                    Band band = findBand(in.nextLine());
-                    if (band == null) {
-                        System.out.println("Band could not be found.");
-                        continue;
-                    }
-                    System.out.println("Which musician do you want to remove? Name:");
-                    Musician musician = findMusician(in.nextLine());
-                    if (musician == null) {
-                        System.out.println("Musician could not be found.");
-                        continue;
-                    }
-                    band.removeMusician(musician);
-                    System.out.println(musician.firstName + " has been removed from " + band.getBandName());
-                }              //DO NOT MODIFY THIS CASE OVER! If you mess it up its on you.
-
-                case "13" -> { //DO NOT MODIFY THIS CASE BELOW! If you mess it up its on you.
-                    System.out.println("Which album do you want a musician to get removed from?");
-                    System.out.println("List: " + Main.albums);
-                    Album album = findAlbum(in.nextLine());
-                    if (album == null) {
-                        System.out.println("Album could not be found.");
-                        continue;
-                    }
-                    System.out.println("Which musician do you want to remove? Name:");
-                    Musician musician = findMusician(in.nextLine());
-                    if (musician == null) {
-                        System.out.println("Musician could not be found.");
-                        continue;
-                    }
-                    album.removeMusician(musician);
-                    System.out.println(musician.firstName + " has been removed from " + album.getFirstName());
-                }           //DO NOT MODIFY THIS CASE OVER! If you mess it up its on you.
-                case "14" -> {
-                    ItemStore.save("data.json");
-                    ItemStore.log();
-                }
-                case "quit" -> System.exit(1); //Exits the program.
-
-                default -> menu("Not a valid input. Choose an option");
-            }
-        }
-    }
-    //find album
-    public Album findAlbum(String name) {
-        List<Album> albums = ItemStore.getList("Album");
-        if (albums!= null){
-            for (Album album : albums){
-                if ((album.getFirstName().equals(name))) {
-                    return album;
                 }
             }
         }
-        return null;
-    }
-//find band
-    public Band findBand(String name) {
-        List<Band> bands = ItemStore.getList("Band");
-        if (bands!= null){
-            for (Band band : bands){
-                if ((band.getBandName().equals(name))) {
-                    return band;
-                }
-            }
-        }
-        return null;
-    }
-//find musician
-    public Musician findMusician(String name) {
-        for (Musician musician : Main.musicians) {
-            if ((musician.getFirstName().equals(name))) {
-                return musician;
-            }
-        }
-        return null;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

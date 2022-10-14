@@ -2,8 +2,7 @@ import java.util.Scanner;
 
 public class Input {
 
-
-    public static void print(String toPrint){
+    public static void print(Object toPrint){
         System.out.println(toPrint);
     }
     public static String string(String question, String reminder){
@@ -136,6 +135,13 @@ public class Input {
         }
         while (answer > max);
         return answer;
+    }
+
+    public static void sleep(int milliSeconds) {
+        try {
+            Thread.sleep(milliSeconds);
+        } catch (Exception ignore) {
+        }
     }
 
 }

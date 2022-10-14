@@ -1,18 +1,14 @@
 import com.google.gson.annotations.JsonAdapter;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Musician extends Item{
 
     // Fields specific to musicians
-    public String firstName;
-    public String lastName;
+    public String name;
     public String infoText;
-    public String dateOfBirth;
-    public String dateOfDeath;
+    public Integer dateOfBirth;
     public String instrument;
-
-    // public ArrayList<Band> myBands = new ArrayList<>();
+    public String yearJoined;
 
     @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Band> bands = new ArrayList<>();
@@ -20,79 +16,173 @@ public class Musician extends Item{
     @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Album> albums = new ArrayList<>();
 
-    @JsonAdapter(ItemListAdapter.class)
-    public ArrayList<Musician> musicians = new ArrayList<>();
+    public String getName() {
+        return name;
+    }
 
     // Constructor
-    public Musician (String firstName, String lastName, String infoText, String dateOfBirth, String dateOfDeath, String instrument){
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Musician (String name, Integer dateOfBirth, String infoText, String instrument){
+        this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.dateOfDeath = dateOfDeath;
         this.infoText = infoText;
         this.instrument = instrument;
         ItemStore.add(this);
-    }
-    //getters
 
-    public String getFirstName() {
-        return firstName;
     }
 
-
-    public String toString(){
-        return "\nName: " + firstName + " " + lastName + "\nDate of birth: " + dateOfBirth + "\nDate of death: " + dateOfDeath + "\nAbout the musician: " + infoText + "\nInstrument the musician is playing: " + instrument + "\n";
+    public int getDateOfBirth() {
+        return dateOfBirth;
     }
 
-//Musician join band //DO NOT MODIFY THIS METHOD UNDER! If you mess it up its on you.
-    public void joinBand(Band bandToJoin){
-        if (!bands.contains(bandToJoin)){
-            bands.add(bandToJoin);
-        }
-        if (!bandToJoin.musicians.contains(this)){
-            bandToJoin.addMusician(this);
+    public String getInfoText() {
+        return infoText;
+    }
+
+    public void setInfoText(String infoText) {
+        this.infoText = infoText;
+    }
+    public String getInstrument() {
+        return instrument;
+    }
+    public void setInstrument(String instrument) {
+        this.instrument = instrument;
+    }
+
+    public void addBandToMusician (Musician musician, Band bandToAdd){
+        if (!musician.getBands().contains(bandToAdd)) {
+            musician.addBand(bandToAdd);
+            bandToAdd.addMusician(musician);
         }
     }
-    //Musician join album //DO NOT MODIFY THIS METHOD UNDER! If you mess it up its on you.
-    public void joinAlbum(Album albumToJoin){
-        if (!albums.contains(albumToJoin)){
-            albums.add(albumToJoin);
-        }
-        if (!albumToJoin.musicians.contains(this)){
-            albumToJoin.addMusician(this);
+
+    public void removeBandFromMusician(Musician musician, Band bandToRemove){
+        if (musician.getBands().contains(bandToRemove)){
+            bandToRemove.removeMusician(musician);
+            musician.removeBand(bandToRemove);
         }
     }
-    //Musician leave album //DO NOT MODIFY THIS METHOD UNDER! If you mess it up its on you.
-    public void leaveAlbum(Album albumToRemove){
-        if (albumToRemove.musicians.contains(this)){
-            albumToRemove.removeMusician(this);
-        }
-        bands.remove(albumToRemove);
-    }
-//Musician leave band //DO NOT MODIFY THIS METHOD UNDER! If you mess it up its on you.
-    public void leaveBand(Band bandToRemove){
-       if (bandToRemove.musicians.contains(this)){
-        bandToRemove.removeMusician(this);
-        }
-       bands.remove(bandToRemove);
-    }
-    public void musicianAge(){
-        // If the dateOfDeath is skipped (as in an empty string)
-        // it should go in to the if statement directly below.
-        // Otherwise, it should go in to the else statement.
-        // Currently, does not show up in the musicians list, needs to be added.
-        if (Objects.equals(dateOfDeath, "")){
-            int currentYear = 2022;
-            int dateOfBirthInt = Integer.parseInt(dateOfBirth);
-            int musiciansAge = currentYear - dateOfBirthInt;
-            String musiciansAgeString = String.valueOf(musiciansAge);
-        } else {
-            int dateOfBirthInt = Integer.parseInt(dateOfBirth);
-            int dateOfDeathInt = Integer.parseInt(dateOfDeath);
-            int musiciansAge = dateOfDeathInt - dateOfBirthInt;
-            String musiciansAgeString = String.valueOf(musiciansAge);
+
+    public void addAlbumToMusician(Musician musician, Album albumToAdd){
+        if (!musician.getAlbums().contains(albumToAdd)) {
+            musician.addAlbum(albumToAdd);
+            albumToAdd.addMusician(musician);
         }
     }
+
+    public void removeAlbumFromMusician(Musician musician, Album albumToRemove){
+        if (musician.getAlbums().contains(albumToRemove)){
+            musician.removeAlbum(albumToRemove);
+            albumToRemove.removeMusician(musician);
+        }
+    }
+
+    public void addBand (Band bandToAdd){
+        if (!bands.contains(bandToAdd)) {
+            bands.add(bandToAdd);
+        }
+    }
+    public void removeBand (Band bandToRemove){
+        if (bands.contains(bandToRemove)){
+            bands.remove(bandToRemove);
+        }
+        else {
+            Input.print("That band is not in the list.");
+        }
+    }
+
+    public void addAlbum (Album albumToAdd){
+        if (!albums.contains(albumToAdd)){
+            albums.add(albumToAdd);
+        }
+    }
+
+    public void removeAlbum (Album albumToRemove){
+        if (albums.contains(albumToRemove)){
+            albums.remove(albumToRemove);
+        }
+        else {
+            Input.print("That album is not in the list.");
+        }
+    }
+    public int age (int dateOfBirth){
+        return 2022 - dateOfBirth;
+    }
+
+
+
+    public static void showAllMusicians() {
+        StringBuilder showMusicians = new StringBuilder();
+        int number = 1;
+        for (Musician musician : ItemStore.lists.musicians) {
+            showMusicians.append(number);
+            showMusicians.append(". ");
+            showMusicians.append(musician.getName());
+            showMusicians.append("\n");
+            number++;
+        }
+        System.out.println(showMusicians);
+    }
+
+    public void leaveBand(Band bandToLeave){
+        bands.remove(bandToLeave);
+        if (bandToLeave.musicians.contains(this)){
+            bandToLeave.removeMusicianFromBand(this, bandToLeave);
+        }
+
+    }
+
+    public static void showMusician(Musician musicianToShow){
+        StringBuilder showMusicianInfo = new StringBuilder();
+        showMusicianInfo.append("Musicians name: ");
+        showMusicianInfo.append(musicianToShow.getName());
+        showMusicianInfo.append("\n");
+        showMusicianInfo.append("Information about the musician: ");
+        showMusicianInfo.append(musicianToShow.getInfoText());
+        showMusicianInfo.append("\n");
+        showMusicianInfo.append("Age: ");
+        showMusicianInfo.append(musicianToShow.age(musicianToShow.dateOfBirth));
+        showMusicianInfo.append("\n");
+        showMusicianInfo.append("Instrument: ");
+        showMusicianInfo.append(musicianToShow.getInstrument());
+        showMusicianInfo.append("\n");
+        if (!musicianToShow.bands.isEmpty()) {
+            Input.print(musicianToShow.bands);
+            showMusicianInfo.append("Bands the musician is in: ");
+            musicianToShow.bands.forEach(band -> {
+                showMusicianInfo.append(band.getBandName());
+            });
+            showMusicianInfo.append("\n");
+        }
+        showMusicianInfo.append("The musicians albums: ");
+        if (!musicianToShow.albums.isEmpty()) {
+            for (Album album : musicianToShow.albums) {
+                showMusicianInfo.append(album.getAlbumName());
+                showMusicianInfo.append("\n");
+            }
+        }
+        else {
+            showMusicianInfo.append("The musician has no albums");
+            showMusicianInfo.append("\n");
+        }
+        showMusicianInfo.append("\n");
+        Input.print(showMusicianInfo);
+    }
+
+
+    public static Musician checkMusicians(String musicianName) {
+        for (Musician musician : ItemStore.lists.musicians) {
+            if (musician.getName().equalsIgnoreCase(musicianName)) {
+                return musician;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Album> getAlbums() {
+        return albums;
+    }
+    public ArrayList<Band> getBands() {
+        return bands;
+    }
+
 }
-
-
