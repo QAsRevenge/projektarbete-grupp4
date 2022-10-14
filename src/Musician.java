@@ -95,7 +95,7 @@ public class Musician extends Item{
         // it should go in to the if statement directly below.
         // Otherwise, it should go in to the else statement.
         // Currently, does not show up in the musicians list, needs to be added.
-        if (dateOfDeath == ""){
+        if (Objects.equals(dateOfDeath, "")){
             int currentYear = 2022;
             int dateOfBirthInt = Integer.parseInt(dateOfBirth);
             int musiciansAge = currentYear - dateOfBirthInt;
