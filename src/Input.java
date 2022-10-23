@@ -4,6 +4,7 @@ public class Input {
 
     public static void print(Object toPrint){
         System.out.println(toPrint);
+
     }
     public static String string(String question, String reminder){
         Scanner in = new Scanner(System.in);

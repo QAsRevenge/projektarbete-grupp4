@@ -1,11 +1,18 @@
 import com.google.gson.annotations.JsonAdapter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Band extends Item {
     private String bandName;
     private String infoText;
     private String yearOfFormation;
     private String yearOfDisband;
+    private String biggestHit;
+
+    private Integer lastReleaseYear;
+
+
+    public static Scanner in = new Scanner(System.in);
 
     @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Album> albums = new ArrayList<>();
@@ -13,14 +20,22 @@ public class Band extends Item {
     public ArrayList<Musician> musicians = new ArrayList<>();
 
 
-    public Band(String bandName, String infoText, String yearOfFormation, String yearOfDisband) {
+    public Band(String bandName, String infoText, String yearOfFormation, String yearOfDisband, String biggestHit, Integer lastReleaseYear) {
         this.bandName = bandName;
         this.infoText = infoText;
         this.yearOfFormation = yearOfFormation;
         this.yearOfDisband = yearOfDisband;
+        this.biggestHit = biggestHit;
+        this.lastReleaseYear = lastReleaseYear;
         ItemStore.add(this);
     }
 
+    public int getLastReleaseYear() { return lastReleaseYear; }
+    public void setLastReleaseYear(int lastReleaseYear ) {this.lastReleaseYear =  lastReleaseYear;}
+
+    public int lastAlbumYr (int lastReleaseYear){
+        return 2022 - lastReleaseYear;
+    }
     public void addAlbum(Album addAlbum) {
         if (!albums.contains(addAlbum)) {
             albums.add(addAlbum);
@@ -42,7 +57,6 @@ public class Band extends Item {
     public void removeMusician(Musician musicianToRemove) {
         musicians.remove(musicianToRemove);
     }
-
 
 
     public void addBandToAlbum(Band band, Album albumToAdd) {
@@ -76,7 +90,7 @@ public class Band extends Item {
     }
 
 
-    public static void showBand(Band bandToShow){
+    public static int showBand(Band bandToShow) {
         StringBuilder showBandInfo = new StringBuilder();
         showBandInfo.append("Band name: ");
         showBandInfo.append(bandToShow.bandName);
@@ -87,6 +101,9 @@ public class Band extends Item {
         showBandInfo.append("The bands year of formation: ");
         showBandInfo.append(bandToShow.yearOfFormation);
         showBandInfo.append(".");
+        showBandInfo.append("\n");
+        showBandInfo.append("The band was hit: ");
+        showBandInfo.append(bandToShow.biggestHit);
         showBandInfo.append("\n");
         if (!bandToShow.yearOfDisband.equals("")) {
             showBandInfo.append("The year the band disbanded: ");
@@ -99,23 +116,28 @@ public class Band extends Item {
                 showBandInfo.append(album.getAlbumName()).append(", ").append(album.getYearOfRelease()).append(".");
                 showBandInfo.append("\n");
             }
-        }
-        else {
+        } else {
             showBandInfo.append("The band has no albums");
             showBandInfo.append("\n");
         }
         showBandInfo.append("The bands members: ");
-        if (!bandToShow.musicians.isEmpty()){
-            for (Musician musician : bandToShow.musicians){
+        if (!bandToShow.musicians.isEmpty()) {
+            for (Musician musician : bandToShow.musicians) {
                 showBandInfo.append(musician.getName()).append("\n").append("Instrument: ").append(musician.getInstrument()).append("\n");
             }
-        }
-        else {
+        } else {
             showBandInfo.append("The band has no members");
             showBandInfo.append("\n");
         }
+        showBandInfo.append("Since the band last released an album: ");
+        if(bandToShow.albums.isEmpty()) {
+            showBandInfo.append("NO ALBUMS RELEASED");
+        } else {
+            showBandInfo.append(bandToShow.lastAlbumYr(bandToShow.lastReleaseYear) + " Years");
+        }
         showBandInfo.append("\n");
         Input.print(showBandInfo);
+        return(0);
     }
     public static void showAllBands() {
         StringBuilder showBands = new StringBuilder();

@@ -42,7 +42,11 @@ public class Menu {
                         String yearOfFormation = in.nextLine();
                         Input.print("Which year did the band disband? If they have not disbanded yet, press enter.");
                         String yearOfDisband = in.nextLine();
-                        new Band(bandName, infoText, yearOfFormation, yearOfDisband);
+                        Input.print("Was this biggest Hit? If not, press enter.");
+                        String biggestHit = in.nextLine();
+                        Input.print("Last album release year? If not, press enter.");
+                        Integer lastReleaseYear  = Integer.valueOf(in.nextLine());
+                        new Band(bandName, infoText, yearOfFormation, yearOfDisband, biggestHit, lastReleaseYear);
                         Input.print(bandName + " has been added.");
                         menu();
                     }
@@ -166,7 +170,11 @@ public class Menu {
                         String instrument = in.nextLine();
                         Input.print("What year was the musician born? (YYYY)");
                         Integer dateOfBirth = in.nextInt();
-                        new Musician(name, dateOfBirth, infoText, instrument);
+                        Input.print("Insert Musician year of joining ? (YYYY)");
+                        Integer yearJoined = in.nextInt();
+                        Input.print("Insert Musician left in year ? (YYYY)");
+                        Integer yearLeftBand = in.nextInt();
+                        new Musician(name,dateOfBirth,infoText,instrument,yearJoined,yearLeftBand);
                         Input.print(name + " has been added.");
                         menu();
                     }

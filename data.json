@@ -1,5 +1,69 @@
 {
-  "bands": [],
-  "musicians": [],
+  "bands": [
+    {
+      "bandName": "ABBA",
+      "infoText": "Swedish Band",
+      "yearOfFormation": "1919",
+      "yearOfDisband": "",
+      "biggestHit": "Yes",
+      "lastReleaseYear": 2005,
+      "albums": [],
+      "musicians": [
+        {
+          "ref": "Musician3"
+        }
+      ],
+      "id": "Band1"
+    },
+    {
+      "bandName": "ABBA",
+      "infoText": "Swedish band",
+      "yearOfFormation": "1972",
+      "yearOfDisband": "",
+      "biggestHit": "Yes",
+      "lastReleaseYear": 2005,
+      "albums": [],
+      "musicians": [],
+      "id": "Band2"
+    }
+  ],
+  "musicians": [
+    {
+      "name": "Agnetha Fältskog",
+      "infoText": "Writer",
+      "dateOfBirth": 1922,
+      "instrument": "Keyboard",
+      "yearJoined": 1938,
+      "bands": [],
+      "albums": [],
+      "id": "Musician1"
+    },
+    {
+      "name": "Vanisha",
+      "infoText": "Writer",
+      "dateOfBirth": 1977,
+      "instrument": "Tabla",
+      "yearJoined": 1997,
+      "yearLeftBand": 2010,
+      "bands": [],
+      "albums": [],
+      "id": "Musician2"
+    },
+    {
+      "name": "VS",
+      "infoText": "Test",
+      "dateOfBirth": 1977,
+      "instrument": "Keyboard",
+      "yearJoined": 1995,
+      "yearLeftBand": 2022,
+      "bands": [
+        {
+          "ref": "Band1"
+        }
+      ],
+      "albums": [],
+      "id": "Musician3"
+    }
+  ],
   "albums": []
 }

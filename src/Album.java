@@ -13,6 +13,8 @@ public class Album extends Item {
     public String infoText;
     public Integer yearOfRelease;
 
+    public Integer lastReleaseYear;
+
 
     public Album(String albumName, String infoText, Integer yearOfRelease) {
         this.albumName = albumName;
@@ -123,6 +125,7 @@ public class Album extends Item {
     public int getYearOfRelease() {
         return yearOfRelease;
     }
+
 }
 
 

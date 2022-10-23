@@ -8,31 +8,33 @@ public class Musician extends Item{
     public String infoText;
     public Integer dateOfBirth;
     public String instrument;
-    public String yearJoined;
+    public Integer yearJoined;
 
+    public Integer yearLeftBand;
     @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Band> bands = new ArrayList<>();
 
     @JsonAdapter(ItemListAdapter.class)
     public ArrayList<Album> albums = new ArrayList<>();
 
-    public String getName() {
-        return name;
-    }
+
 
     // Constructor
-    public Musician (String name, Integer dateOfBirth, String infoText, String instrument){
+    public Musician (String name, Integer dateOfBirth, String infoText, String instrument, Integer yearJoined, Integer yearLeftBand){
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.infoText = infoText;
         this.instrument = instrument;
+        this.yearJoined = yearJoined;
+        this.yearLeftBand = yearLeftBand;
         ItemStore.add(this);
 
     }
-
-    public int getDateOfBirth() {
-        return dateOfBirth;
+    public String getName() {
+        return name;
     }
+
+    public int getDateOfBirth() {return dateOfBirth;}
 
     public String getInfoText() {
         return infoText;
@@ -47,6 +49,14 @@ public class Musician extends Item{
     public void setInstrument(String instrument) {
         this.instrument = instrument;
     }
+
+    public Integer getYearJoined() {return yearJoined;}
+    public void setYearJoined(Integer yearJoined) {this.yearJoined = yearJoined;}
+
+    public Integer getYrsLeftBand() {return yearLeftBand;}
+    public void setYrsLeftBand(Integer yearLeftBand) {this.yearLeftBand = yearLeftBand;}
+
+    public int yrsWithBand(){return yearLeftBand - yearJoined;}
 
     public void addBandToMusician (Musician musician, Band bandToAdd){
         if (!musician.getBands().contains(bandToAdd)) {
@@ -131,6 +141,11 @@ public class Musician extends Item{
 
     }
 
+    //public static int yearsSinceLeftBand(String band){
+
+
+
+
     public static void showMusician(Musician musicianToShow){
         StringBuilder showMusicianInfo = new StringBuilder();
         showMusicianInfo.append("Musicians name: ");
@@ -145,6 +160,13 @@ public class Musician extends Item{
         showMusicianInfo.append("Instrument: ");
         showMusicianInfo.append(musicianToShow.getInstrument());
         showMusicianInfo.append("\n");
+        showMusicianInfo.append("Musician year of joining : ");
+        showMusicianInfo.append(musicianToShow.getYearJoined());
+        showMusicianInfo.append("\n");
+    //    showMusicianInfo.append("Musician left the Band : ");
+  //      showMusicianInfo.append(musicianToShow.getYrsLeftBand());
+   //     showMusicianInfo.append("\n");
+
         if (!musicianToShow.bands.isEmpty()) {
             Input.print(musicianToShow.bands);
             showMusicianInfo.append("Bands the musician is in: ");
@@ -153,17 +175,25 @@ public class Musician extends Item{
             });
             showMusicianInfo.append("\n");
         }
+
         showMusicianInfo.append("The musicians albums: ");
         if (!musicianToShow.albums.isEmpty()) {
             for (Album album : musicianToShow.albums) {
                 showMusicianInfo.append(album.getAlbumName());
                 showMusicianInfo.append("\n");
             }
-        }
-        else {
+        } else {
             showMusicianInfo.append("The musician has no albums");
             showMusicianInfo.append("\n");
         }
+
+       showMusicianInfo.append("Musician years with the band: ");
+        if(musicianToShow.bands.isEmpty()) {
+            showMusicianInfo.append("Musician is not in band");
+            } else {
+            showMusicianInfo.append(musicianToShow.yrsWithBand() + "Years");
+            showMusicianInfo.append("\n");
+            }
         showMusicianInfo.append("\n");
         Input.print(showMusicianInfo);
     }

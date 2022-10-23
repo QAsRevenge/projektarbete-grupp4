@@ -34,8 +34,8 @@ public class ItemStore {
   public static Item getItemFromClassName(String className) {
     return
             className.equals("Album") ? new Album("", "", null) :
-                    className.equals("Band") ? new Band("", "", "", "") :
-                            className.equals("Musician") ? new Musician("",null, "","") :
+                    className.equals("Band") ? new Band("", "", "", "", "", null) :
+                            className.equals("Musician") ? new Musician("",null, "","", null, null ) :
                                     null;
   }
 
