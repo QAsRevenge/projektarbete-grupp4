@@ -20,7 +20,7 @@ public class Musician extends Item{
 
 
     // Constructor
-    public Musician (String name, Integer dateOfBirth, String infoText, String instrument, Integer yearJoined, Integer yearLeftBand){
+    public Musician (String name, Integer dateOfBirth, String infoText, String instrument, Integer yearJoined,Integer yearLeftBand){
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.infoText = infoText;
@@ -54,9 +54,18 @@ public class Musician extends Item{
     public void setYearJoined(Integer yearJoined) {this.yearJoined = yearJoined;}
 
     public Integer getYrsLeftBand() {return yearLeftBand;}
-    public void setYrsLeftBand(Integer yearLeftBand) {this.yearLeftBand = yearLeftBand;}
+   // public void setYrsLeftBand(Integer yearLeftBand) {this.yearLeftBand = yearLeftBand;}
 
     public int yrsWithBand(){return yearLeftBand - yearJoined;}
+
+   /*public void yearsSinceLeftBand(Musician musician,Band bandToLeft, Integer yearLeftBand) {
+        if(musician.getBands().contains(bandToLeft)){
+            yearLeftBand = in.nextLine()
+            bandToLeft.removeMusician(musician);
+            musician.removeBand(bandToLeft);
+        }
+    }*/
+
 
     public void addBandToMusician (Musician musician, Band bandToAdd){
         if (!musician.getBands().contains(bandToAdd)) {
@@ -141,9 +150,6 @@ public class Musician extends Item{
 
     }
 
-    //public static int yearsSinceLeftBand(String band){
-
-
 
 
     public static void showMusician(Musician musicianToShow){
@@ -163,9 +169,13 @@ public class Musician extends Item{
         showMusicianInfo.append("Musician year of joining : ");
         showMusicianInfo.append(musicianToShow.getYearJoined());
         showMusicianInfo.append("\n");
-    //    showMusicianInfo.append("Musician left the Band : ");
-  //      showMusicianInfo.append(musicianToShow.getYrsLeftBand());
-   //     showMusicianInfo.append("\n");
+        showMusicianInfo.append("Musician since left the Band : ");
+        if (!musicianToShow.yearLeftBand.equals("")) {
+            //showMusicianInfo.append("The year the band left: ");
+            showMusicianInfo.append(musicianToShow.yearLeftBand);
+            showMusicianInfo.append("\n");
+        }
+
 
         if (!musicianToShow.bands.isEmpty()) {
             Input.print(musicianToShow.bands);
@@ -190,7 +200,10 @@ public class Musician extends Item{
        showMusicianInfo.append("Musician years with the band: ");
         if(musicianToShow.bands.isEmpty()) {
             showMusicianInfo.append("Musician is not in band");
+            showMusicianInfo.append("\n");
             } else {
+            showMusicianInfo.append("\n");
+            showMusicianInfo.append("Since Musician in the Band: ");
             showMusicianInfo.append(musicianToShow.yrsWithBand() + "Years");
             showMusicianInfo.append("\n");
             }

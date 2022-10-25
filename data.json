@@ -2,59 +2,48 @@
   "bands": [
     {
       "bandName": "ABBA",
-      "infoText": "Swedish Band",
-      "yearOfFormation": "1919",
+      "infoText": "Sweden",
+      "yearOfFormation": "1965",
       "yearOfDisband": "",
       "biggestHit": "Yes",
       "lastReleaseYear": 2005,
       "albums": [],
       "musicians": [
         {
-          "ref": "Musician3"
+          "ref": "ref: Musician1"
+        },
+        {
+          "ref": "ref: Musician1"
+        },
+        {
+          "ref": "Musician1"
         }
       ],
       "id": "Band1"
     },
     {
-      "bandName": "ABBA",
-      "infoText": "Swedish band",
+      "bandName": "Pink Floud",
+      "infoText": "American band",
       "yearOfFormation": "1972",
       "yearOfDisband": "",
       "biggestHit": "Yes",
-      "lastReleaseYear": 2005,
+      "lastReleaseYear": 2010,
       "albums": [],
-      "musicians": [],
+      "musicians": [
+        {
+          "ref": "ref: ref: ref: Musician1"
+        }
+      ],
       "id": "Band2"
     }
   ],
   "musicians": [
     {
-      "name": "Agnetha Fältskog",
+      "name": "Vani",
       "infoText": "Writer",
-      "dateOfBirth": 1922,
+      "dateOfBirth": 1970,
       "instrument": "Keyboard",
-      "yearJoined": 1938,
-      "bands": [],
-      "albums": [],
-      "id": "Musician1"
-    },
-    {
-      "name": "Vanisha",
-      "infoText": "Writer",
-      "dateOfBirth": 1977,
-      "instrument": "Tabla",
-      "yearJoined": 1997,
-      "yearLeftBand": 2010,
-      "bands": [],
-      "albums": [],
-      "id": "Musician2"
-    },
-    {
-      "name": "VS",
-      "infoText": "Test",
-      "dateOfBirth": 1977,
-      "instrument": "Keyboard",
-      "yearJoined": 1995,
+      "yearJoined": 1990,
       "yearLeftBand": 2022,
       "bands": [
         {
@@ -62,7 +51,7 @@
         }
       ],
       "albums": [],
-      "id": "Musician3"
+      "id": "Musician1"
     }
   ],
   "albums": []

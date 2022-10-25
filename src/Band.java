@@ -83,9 +83,9 @@ public class Band extends Item {
     }
 
     public void removeMusicianFromBand(Musician musicianToRemove, Band band){
+        musicians.remove(musicianToRemove);
         if (band.getMusicians().contains(musicianToRemove)) {
             musicianToRemove.leaveBand(this);
-            band.removeMusician(musicianToRemove);
         }
     }
 

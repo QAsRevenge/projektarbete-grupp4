@@ -172,8 +172,8 @@ public class Menu {
                         Integer dateOfBirth = in.nextInt();
                         Input.print("Insert Musician year of joining ? (YYYY)");
                         Integer yearJoined = in.nextInt();
-                        Input.print("Insert Musician left in year ? (YYYY)");
-                        Integer yearLeftBand = in.nextInt();
+                        //Input.print("Enter year Musician left band,? If no info just Enter :");
+                        Integer yearLeftBand = 2022;
                         new Musician(name,dateOfBirth,infoText,instrument,yearJoined,yearLeftBand);
                         Input.print(name + " has been added.");
                         menu();
@@ -242,7 +242,9 @@ public class Menu {
                         Input.print("Which band would you like to remove from the musician?");
                         Band bandToRemove = Band.checkBands(in.nextLine());
                         assert musicianToRemove != null;
-                        musicianToRemove.removeBandFromMusician(musicianToRemove, bandToRemove);
+                        Input.print("Since year musician with Band?");
+                        Musician yearLeftBand = Musician.checkMusicians(in.nextLine());
+                        //musicianToRemove.yearsSinceLeftBand(musicianToRemove,bandToRemove,yearLeftBand);
                         menu();
                     }
                     case "Add an album to a musician": {
